@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class = 'container'>
+    <div>
+        <form action="{%url 'main:request_update' board.id %}" method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            <p>제목 : <input type="text" name="title" value="{{board.title}}"></p>
+            <p>식당 이름 : <input type="text" name="cafeteria" value="{{board.cafeteria}}"></p>
+            <p>비고 : <textarea type="text" name="body" id="" cols="30" rows="10">{{board.body}}</textarea>
+            </p>
+            <button type="submit">제출</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

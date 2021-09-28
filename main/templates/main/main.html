@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %}
 
 <!-- ===============================================-->
 <!--    Main Content-->
@@ -8,6 +10,7 @@
     class="navbar navbar-expand-lg navbar-light bg-light fixed-top"
     data-navbar-on-scroll="data-navbar-on-scroll"
   >
+    <a href = "{% url 'board/board_main' %}"></a>
     <div class="container">
       <a class="navbar-brand d-inline-flex" href="index.html">
         <img
@@ -62,6 +65,7 @@
         </form>
       </div>
     </div>
+
   </nav>
   <section class="py-5 overflow-hidden bg-primary" id="home">
     <div class="container">

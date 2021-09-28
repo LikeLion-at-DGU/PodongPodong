@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class = "board_main">
+    <div class = 'board_content'>
+        <p class = "board_p"><a href = "{% url 'board:request_new' %}"></a>글 작성하기</p>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col" id="board">번호</th>
+                    <th scope="col" id="board">제목</th>
+                    <th scope="col" id="board">작성자</th>
+                    <th scope="col" id="board">작성날짜</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for board in boards %}
+                <tr>
+                    <td>{{ forloop.revcounter }}</td>
+                    <td><a href="{% url 'board:request_detail' board.id %}">{{board.title}}</a></td>
+                    <td>{{board.writer}}</td>
+                    <td>{{board.date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+{% endblock %}

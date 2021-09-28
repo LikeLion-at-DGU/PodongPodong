@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div class = 'container'>
+    <div>
+        <form action = "{% url 'board:request_create' %}" method="POST">
+            {%csrf_token%}
+            <p id = "new">제목  <input type="text"  name="title" ></p>
+            <p id = "new">식당 이름  <input type="text"  name="cafeteria" ></p>
+            <p id = "new">비고  <textarea name="body" cols="30" rows="10"></textarea></p>
+            <br>
+            <button type='submit'>제출</button>
+        </form>
+    </div>
+</div>
+
+{% else %} 
+    <div class = "authentication">
+        <h3> 로그인 후 글 등록 가능</h3>
+        <a href = "{% url 'account_login' %}"  class="btn btn-warning">로그인</button></a>
+        <a href = "{% url 'account_signup' %}" class="btn btn-warning">회원가입</a>
+    </div>
+</div>
+
+{% endblock %}
