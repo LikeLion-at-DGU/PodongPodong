@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row h-100">
             <div class="col-lg-7 mx-auto text-center mb-6">
-                <h5 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3">
+                <h5 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3">식당정보</h5>
                 {{ restaurant.category }}
                 {{ restaurant.name }}
                 {{ restaurant.location }}
@@ -15,8 +15,15 @@
                 {{ restaurant.business_open_hour }}
                 {{ restaurant.business_close_hour }}
                 {{ restaurant.thumbnail }}
-                </h5>
+                <h5>메뉴정보</h5>
+                {% for food in menu_list %}
+                    {{ food.name}} / {{ food.price }} <br/>
+                {% endfor %}
+
+
             </div>
+
+            <div>
         </div>
     </div>
 </section>
