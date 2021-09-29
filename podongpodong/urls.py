@@ -18,7 +18,7 @@ from django.urls import path, include
 from podongpodong import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('mainPage.urls')),
-    path('restaurant/', include('restaurant.urls')),
+    path('admin/', admin.site.urls), # admin
+    path('', views.main, name="main"),
+    path('restaurant/', include('restaurant.urls')), # 식당
 ]

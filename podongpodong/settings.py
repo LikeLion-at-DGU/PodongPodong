@@ -41,7 +41,6 @@ INSTALLED_APPS = [
 
 # 프로젝트에 우리가 생성한 app 목록
 INSTALLED_APPS += [
-    'mainPage',
     'restaurant',
 ]
 
@@ -60,7 +59,7 @@ ROOT_URLCONF = 'podongpodong.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'podongpodong', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

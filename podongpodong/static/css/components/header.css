@@ -1,0 +1,8 @@
+.nav_item {
+  transition-duration: 0.3s;
+}
+
+.nav_item:hover {
+  color: #feb211;
+  cursor: pointer;
+}
