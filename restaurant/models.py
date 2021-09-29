@@ -4,6 +4,7 @@ from django.urls import reverse
 
 # 식당분류 모델
 class Category(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20)
 
     def __str__(self):

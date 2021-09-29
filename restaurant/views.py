@@ -21,6 +21,16 @@ class RestaurantListView(ListView):
         return context
 
 
+def RestaurantList(request, id):
+    category = Category.objects.all()
+    restaurant = Restaurant.objects.all()
+    if id:
+        current_category = get_object_or_404(Category, id=id)
+        restaurant = Restaurant.objects.filter(category=current_category) #다시 필터를 걸어 해당 카테고리 내부의 것들만 모은다.
+    context = {'category': category, 'restaurant_list': restaurant}
+    return render(request, 'restaurant/category.html', context)
+
+
 class RestaurantDetailView(DetailView):
     model = Restaurant
     context_object_name = 'restaurant_detail'
