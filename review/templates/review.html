@@ -1,0 +1,49 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<section class="py-0 bg-primary-gradient">
+    <div class="container">
+      <div class="row justify-content-center g-0">
+        <div class="col-xl-9">
+          <div class="col-lg-6 text-center mx-auto mb-3 mb-md-5 mt-4">
+            <h5 class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6" style="margin-top:8rem !important;">식당 후기 보기</h5>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 col-md-2 mb-3">
+              <button style="background-color: #F17228; color: white; font-weight: bold; border: none; border-radius: 5px; width: 80px;">전체</button>
+            </div>
+            <div class="col-xs-3 col-md-2 mb-3">
+              <button style="background-color: #F17228; color: white; font-weight: bold; border: none; border-radius: 5px; width: 80px;">양식</button>
+            </div>
+            <div class="col-xs-3 col-md-2 mb-3">
+              <button style="background-color: #F17228; color: white; font-weight: bold; border: none; border-radius: 5px; width: 80px;">중식</button>
+            </div>
+            <div class="col-xs-3 col-md-2 mb-3">
+              <button style="background-color: #F17228; color: white; font-weight: bold; border: none; border-radius: 5px; width: 80px;">한식</button>
+            </div>
+            <div class="col-xs-3 col-md-2 mb-3">
+              <button style="background-color: #F17228; color: white; font-weight: bold; border: none; border-radius: 5px; width: 80px;">카페</button>
+            </div>
+            <div class="col-xs-3 col-md-2 mb-3">
+              <button style="background-color: #F17228; color: white; font-weight: bold; border: none; border-radius: 5px; width: 80px;">술집</button>
+            </div>
+          </div>
+          <table class="table">
+            <thead>
+                <tr class="thead">
+                    <th width=10%>순번</th>
+                    <th width=15%>식당</th>
+                    <th width=15%>메뉴</th>
+                    <th width=50%>제목</th>
+                    <th>좋아요</th>
+                </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section> 
+  <style>
+    .thead {
+      border-bottom:#F17228;
+    }
+  </style>
+{% endblock %}

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 # 프로젝트에 우리가 생성한 app 목록
 INSTALLED_APPS += [
     'restaurant',
+    'review',
 ]
 
 MIDDLEWARE = [
