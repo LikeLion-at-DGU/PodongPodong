@@ -26,7 +26,7 @@
             <div>
                 <form action="{% url 'restaurant:create_restaurant_comment' restaurant.id %}" method="POST">
                     {%csrf_token%}
-                    <textarea name="review_content" placeholder="후기를 입력해주세요 :) "></textarea>
+                    <textarea name="review_content" placeholder="후기를 입력해주세요:) "></textarea>
                     <select name="review_menu">
                         {% for food in menu_list %}
                             <option value="{{ food.id }}">{{ food.name }}</option>

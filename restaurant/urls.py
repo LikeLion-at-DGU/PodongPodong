@@ -7,5 +7,5 @@ urlpatterns = [
     path('', views.RestaurantListView.as_view(), name='restaurant_list'),
     path('<str:id>/', RestaurantList, name='restaurant_list2'),
     path('detail/<int:pk>/', views.RestaurantDetailView.as_view(), name='restaurant_detail'),
-    path('<int:id>/create_comment', CreateRestaurantComment, name="create_restaurant_comment"),
+    path('<int:id>/create_comment', CreateRestaurantComment, name='create_restaurant_comment'),
 ]
