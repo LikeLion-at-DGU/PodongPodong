@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView
-from restaurant.models import Category, Restaurant
+from restaurant.models import Category, Restaurant, FoodMenu
 
 
 # 식당보기 > 식당 리스트가 나오는 페이지
@@ -21,16 +21,18 @@ class RestaurantListView(ListView):
         return context
 
 
+# 식당보기 > 식당 리스트가 나오는 페이지 (선택한 카테고리별 메뉴가 나오도록)
 def RestaurantList(request, id):
     category = Category.objects.all()
     restaurant = Restaurant.objects.all()
     if id:
         current_category = get_object_or_404(Category, id=id)
-        restaurant = Restaurant.objects.filter(category=current_category) #다시 필터를 걸어 해당 카테고리 내부의 것들만 모은다.
+        restaurant = Restaurant.objects.filter(category=current_category)
     context = {'category': category, 'restaurant_list': restaurant}
     return render(request, 'restaurant/category.html', context)
 
 
+# 식당 상세보기
 class RestaurantDetailView(DetailView):
     model = Restaurant
     context_object_name = 'restaurant_detail'
@@ -40,9 +42,11 @@ class RestaurantDetailView(DetailView):
         context = super().get_context_data(*args, **kwargs)
         # 현재 선택된 식당
         context['restaurant'] = self.restaurant
+        context['menu_list'] = FoodMenu.objects.filter(restaurant=self.restaurant)
         return context
 
     def get(self, request, *args, **kwargs):
         if 'pk' in kwargs:
             self.restaurant = Restaurant.objects.get(pk=kwargs['pk'])
         return super().get(request, *args, **kwargs)
+

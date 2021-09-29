@@ -27,3 +27,32 @@ class Restaurant(models.Model):
 
     def get_absolute_url(self):
         return reverse('restaurant:restaurant_detail', args=[self.id])
+
+
+# 메뉴 모델
+# 메뉴 기본 정보 : 식당, 메뉴이름, 가격, 음식사진
+class FoodMenu(models.Model):
+    id = models.AutoField(primary_key=True)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    name = models.CharField(max_length=20)
+    price = models.CharField(max_length=20)
+    thumbnail = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.name
+
+
+# 후기 모델
+# 후기 기본 정보 : 식당, 메뉴, 작성일, 음식사진, (추가예정 : 추천, 비추천, 후기를 쓴 사용자)
+class Comment(models.Model):
+    id = models.AutoField(primary_key=True)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    menu = models.ForeignKey(FoodMenu, on_delete=models.CASCADE)
+    content = models.TextField()
+    thumbnail = models.ImageField(upload_to='images/')
+    created_at = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return self.name
+
+
