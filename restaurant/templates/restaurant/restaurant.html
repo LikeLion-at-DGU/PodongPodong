@@ -24,6 +24,24 @@
             </div>
 
             <div>
+                <form action="{% url 'restaurant:create_restaurant_comment' restaurant.id %}" method="POST">
+                    {%csrf_token%}
+                    <textarea name="review_content" placeholder="후기를 입력해주세요 :) "></textarea>
+                    <select name="review_menu">
+                        {% for food in menu_list %}
+                            <option value="{{ food.id }}">{{ food.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="file" class="form-control" id="image" name="review_image">
+                    <input type="submit" value="확인">
+                </form>
+            </div>
+
+
+            <h5>후기 목록</h5>
+            {% for comment in comment_list %}
+                {{ comment.restaurant.name }} / {{ comment.menu.name }} / {{ comment.content }} <br/>
+            {% endfor %}
         </div>
     </div>
 </section>
