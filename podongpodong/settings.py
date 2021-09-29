@@ -37,6 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main',
+    'users',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -124,5 +131,18 @@ STATICFILES_DIRS =[
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+AUTHENTICATION_BACKENDS=[
+    #슈퍼유저 로그인가능
+    'django.contrib.auth.backends.ModelBackend',
+    #이메일 등의 로그인가능
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+#admin페이지 관리번호, 단일서버는 1을 입력
+SITE_ID=1
+
+#로그인되면 ㅣ동하는페이지 만약 글목록으로 이동하고싶으면 '/posts/'
+#메인화면으로 이동
+LOGIN_REDIRECT_URL='/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

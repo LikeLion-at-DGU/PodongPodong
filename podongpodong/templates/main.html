@@ -57,7 +57,20 @@
             type="submit"
           >
             <i class="fas fa-user me-2"></i>
-            Login
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                login
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if user.is_authenticated %}
+                <li><a class="dropdown-item" href="{% url 'users:mypage' %}">Mypage</a></li>
+                <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout </a></li>
+                {% else %}
+                <li><a class="dropdown-item" href="{%url 'account_login'%}">Login</a></li>
+                <li><a class="dropdown-item" href="{%url 'account_signup'%}">Signup</a></li>
+                {% endif %}
+              </ul>
+            </li>
           </button>
         </form>
       </div>
