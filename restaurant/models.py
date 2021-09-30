@@ -12,8 +12,9 @@ class Category(models.Model):
 
 
 # 식당 모델
-# 식당 기본 정보 : 식당분류, 가게이름, 위치, 전화번호, 오픈시간, 가게사진 (추가예정 : 좋아요(팔로우), 메뉴, 리뷰)
+# 식당 기본 정보 : 식당분류, 가게이름, 위치, 전화번호, 오픈시간, 가게사진 (추가예정 : 팔로우)
 class Restaurant(models.Model):
+    id = models.AutoField(primary_key=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
     location = models.CharField(max_length=100)
@@ -52,7 +53,5 @@ class Comment(models.Model):
     thumbnail = models.ImageField(upload_to='images/')
     created_at = models.DateTimeField(auto_now_add = True)
 
-    def __str__(self):
-        return self.name
 
 
