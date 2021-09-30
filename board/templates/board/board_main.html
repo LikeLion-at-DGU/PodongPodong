@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section>
+    <div class = 'container'>
+        <div class = "board_main">
+            <div class = 'board_content'>
+                <h2>건의함</h2>
+                <div>
+                    <button><a href = "{% url 'board:request_new' %}">글쓰기</a></button>
+                </div>
+                <table class = 'board_table'>
+                    <thead>
+                        <tr>
+                            <th scope="col" id = 'board_num'>No.</th>
+                            <th scope="col" id = 'board_title'>제목</th>
+                            <th scope='col' id = 'board_cafeteria'>식당 이름</th>
+                            <th scope="col" id = 'board_writer'>작성자</th>
+                            <th scope="col" id = 'board_date'>작성날짜</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for board in boards %}
+                        <tr>
+                            <td>{{ forloop.revcounter }}</td>
+                            <td><a href="{% url 'board:request_detail' board.id %}">{{board.title}}</a></td>
+                            <td>{{board.cafeteria}}</td>
+                            <td>{{board.writer}}</td>
+                            <td>{{board.date}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
