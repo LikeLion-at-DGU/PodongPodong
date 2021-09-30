@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 # 프로젝트에 우리가 생성한 app 목록
 INSTALLED_APPS += [
     'restaurant',
+    'review',
     'board',
 ]
 
@@ -89,7 +90,7 @@ WSGI_APPLICATION = 'podongpodong.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
