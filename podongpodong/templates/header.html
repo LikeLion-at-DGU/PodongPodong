@@ -65,10 +65,20 @@
             aria-label="Search"
           />
         </div>
-        <button class="btn btn-white shadow-warning text-warning" type="submit">
-          <i class="fas fa-user me-2"></i>
+      <div class="dropdown nav-link mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">
+        <p class="dropbtn nav_item mb-0 fw-bold text-lg-center mt-3">
           Login
-        </button>
+        </p>
+        <div class="dropdown-content">
+          {% if user.is_authenticated %}
+            <a class="dropdown-item" href="{% url 'users:mypage' %}">Mypage</a></li>
+            <a class="dropdown-item" href="{% url 'account_logout' %}">Logout </a></li>
+          {% else %}
+            <a class="dropdown-item" href="{%url 'account_login'%}">Login</a></li>
+            <a class="dropdown-item" href="{%url 'account_signup'%}">Signup</a></li>
+          {% endif %}
+        </div>
+      </div> 
       </form>
     </div>
   </div>
