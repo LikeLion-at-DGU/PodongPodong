@@ -1,0 +1,66 @@
+.board_content{
+    text-align:right;
+}
+
+.board_content h2{
+    text-align:center;
+}
+
+.board_table{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:5px;
+    text-align:center;
+    line-height:1.5;
+    margin:20px 10px;
+}
+
+.board_table th{
+    padding:20px;
+    font-weight:bold;
+    vertical-align:top;
+    color:black;
+    background:lightsalmon;
+}
+
+#board_num{
+    width:10%;
+}
+
+#board_cafeteria{
+    width:15%
+}
+
+#board_title{
+    width:35%;
+}
+
+#board_writer{
+    width:15%;
+}
+
+.board_table td{
+    width:155px;
+    padding:10px;
+    vertical-align:top;
+    border-bottom:1px solid #ccc;
+    color:black;
+    background:white;
+}
+
+.board_new input, .board_edit input{
+    margin-bottom:8px;
+}
+
+.board_new textarea, .board_edit textarea{
+    width:50%;
+    height:20%;
+}
+
+.board_authentication{
+    text-align:center;
+}
+
+.detail_head {
+    padding: 10px 0px;
+}

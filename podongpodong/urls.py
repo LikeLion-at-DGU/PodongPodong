@@ -24,4 +24,5 @@ urlpatterns = [
     path('review/', include('review.urls')),
     path('users/',include('users.urls')),
     path('accounts/',include('allauth.urls')),
+    path('board/',include('board.urls')), # 건의함
 ]
