@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section>
+    <div class='board_content'>
+        <h2>글 수정하기</h2><br><br>
+    </div>
+
+<div class = 'container'>
+    <div class = 'board_edit'>
+        <form action="{%url 'board:request_update' board.id %}" method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            <p>제목</p>
+            <input type="text" name="title" value="{{board.title}}">
+            <p>식당 이름</p>
+            <input type="text" name="cafeteria" value="{{board.cafeteria}}">
+            <p>비고</p>
+            <textarea type="text" name="body" id="" cols="30" rows="10">{{board.body}}</textarea>
+            <br>
+            <button type="submit">제출</button>
+        </form>
+    </div>
+</div>
+</section>
+
+{% endblock %}

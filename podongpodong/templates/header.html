@@ -7,14 +7,14 @@
   data-navbar-on-scroll="data-navbar-on-scroll"
 >
   <div class="container">
-    <a class="navbar-brand d-inline-flex" href="index.html">
+    <a class="navbar-brand d-inline-flex" href="{% url 'main' %}">
       <img
         class="d-inline-block"
         src="{% static 'img/gallery/logo.svg' %}"
         alt="logo"
       />
       <span class="text-1000 fs-3 fw-bold ms-2 text-gradient">
-        foodwaGon
+        포동포동
       </span>
     </a>
     <button
@@ -51,8 +51,8 @@
           건의함
         </p>
         <div class="dropdown-content">
-          <a href="#">건의하기</a>
-          <a href="#">건의 목록</a>
+          <a href="{% url 'board:request_new' %}">건의하기</a>
+          <a href="{% url 'board:board_main' %}">건의 목록</a>
         </div>
       </div>
       <form class="d-flex mt-4 mt-lg-0 ms-lg-auto ms-xl-0">

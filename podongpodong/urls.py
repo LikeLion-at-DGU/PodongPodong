@@ -23,4 +23,5 @@ urlpatterns = [
     path('restaurant/', include('restaurant.urls')), # 식당
     path('users/',include('users.urls')),
     path('accounts/',include('allauth.urls')),
+    path('board/',include('board.urls')), # 건의함
 ]
