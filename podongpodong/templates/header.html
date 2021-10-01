@@ -32,22 +32,20 @@
       class="collapse navbar-collapse border-top border-lg-0 my-2 mt-lg-0"
       id="navbarSupportedContent"
     >
-      <a class="d-inline-flex" href="{% url 'restaurant:restaurant_list' %}">
-        <div class="nav-link mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">
-          <p class="nav_item mb-0 fw-bold text-lg-center mt-3">
-            식당 보기
-          </p>
-        </div>
-      </a>
-      <div class="nav-link mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">
-        <p class="nav_item mb-0 fw-bold text-lg-center mt-3">
-          <a href="{% url 'review:review' %}">후기 보기</a>
+      <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">
+        <p class="mb-0 fw-bold text-lg-center mt-3">
+          <a class="nav-link nav_item d-inline-flex" href="{% url 'restaurant:restaurant_list' %}">식당 보기</a>
+        </p>
+      </div>
+      <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">
+        <p class="mb-0 fw-bold text-lg-center mt-3">
+          <a class="nav-link nav_item" href="{% url 'review:review' %}">후기 보기</a>
         </p>
       </div>
       <div
-        class="dropdown nav-link mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block"
+        class="dropdown mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block"
       >
-        <p class="dropbtn nav_item mb-0 fw-bold text-lg-center mt-3">
+        <p class="nav-link nav_item dropbtn nav_item mb-0 fw-bold text-lg-center mt-3">
           건의함
         </p>
         <div class="dropdown-content">
