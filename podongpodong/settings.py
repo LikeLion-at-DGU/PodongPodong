@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main',
-    'users',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -49,6 +47,7 @@ INSTALLED_APPS = [
 # 프로젝트에 우리가 생성한 app 목록
 INSTALLED_APPS += [
     'restaurant',
+    'users',
     'review',
     'board',
 ]
@@ -146,10 +145,13 @@ AUTHENTICATION_BACKENDS=[
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 #admin페이지 관리번호, 단일서버는 1을 입력
-SITE_ID=1
+SITE_ID=2
 
-#로그인되면 ㅣ동하는페이지 만약 글목록으로 이동하고싶으면 '/posts/'
+########## AUTH ##########
 #메인화면으로 이동
 LOGIN_REDIRECT_URL='/'
+#account 설정
+ACCOUNT_DEFAULT_HTTP_PROTOCOL='http'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
