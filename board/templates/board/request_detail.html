@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section>
+    <div class = 'container'>
+        <div id = 'content'>
+        작성자 : <strong>{{board.writer}}</strong> /&nbsp; 날짜 : <strong>{{board.date}}</strong>
+        <hr>
+        <p><strong>제목 :</strong> {{board.title}}</p>
+        <p><strong>식당 이름:</strong> {{board.cafeteria}}</p>
+        <hr>
+        <p>{{board.body}}</p>
+        </div>
+        <br>
+    </div>
+
+    {% if user == board.writer %}
+    <div class = 'container'>
+        <button><a href="{% url 'board:request_edit' board.id %}">수정</a></button> &nbsp;
+        <button><a href="{% url 'board:request_delete' board.id %}">삭제</a></button> &nbsp;
+        <button><a href="{% url 'board:board_main' %}">건의함으로 돌아가기</a></button>
+    </div>
+    {% else %}
+    <div class = 'container'>
+      <button><a href="{% url 'board:board_main' %}">건의함으로 돌아가기</a></button>
+    </div>
+    {% endif %}
+
+</section>
+{% endblock %}

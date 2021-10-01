@@ -21,6 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls), # admin
     path('', views.main, name="main"),
     path('restaurant/', include('restaurant.urls')), # 식당
+    path('review/', include('review.urls')),
     path('users/',include('users.urls')),
     path('accounts/',include('allauth.urls')),
+    path('board/',include('board.urls')), # 건의함
 ]
