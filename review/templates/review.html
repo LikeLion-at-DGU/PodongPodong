@@ -8,11 +8,11 @@
           </div>
           <div class="row">
             <div class="col-xs-3 col-md-2 mb-3">
-              <button onclick="location.href='{% url 'review:review' %}'">전체</button>
+              <button class="bnt" onclick="location.href='{% url 'review:review' %}'">전체</button>
             </div>
             {% for category in category %}
             <div class="col-xs-3 col-md-2 mb-3">
-              <button onclick="location.href='{% url 'review:filter' category.id %}'">{{category.name}}</button>
+              <button class="bnt" onclick="location.href='{% url 'review:filter' category.id %}'">{{category.name}}</button>
             </div>
             {% endfor %}
           </div>
@@ -29,12 +29,13 @@
             </thead>
             <tbody>
             {% for review in reviews %}
-                <tr>
-                    <td>></td>
+                <tr onclick="location.href='{% url 'restaurant:restaurant_detail' review.restaurant.id %}'">
+                    <td>{{ forloop.revcounter }}</td>
                     <td>{{review.restaurant.name}}</td>
                     <td>{{review.menu}}</td>
                     <td>{{review.content}}</td>
                     <td>{{user}}</td>
+                    <td></td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -47,7 +48,7 @@
     .thead {
       border-bottom:#F17228;
     }
-    button {
+    .bnt {
       background-color: #F17228; 
       color: white; 
       font-weight: bold; 
