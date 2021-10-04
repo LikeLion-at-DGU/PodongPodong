@@ -5,13 +5,13 @@ from restaurant.models import *
 # Create your views here.
 
 def review(request):
-    reviews = Comment.objects.all()
+    reviews = Comment.objects.all().order_by("-created_at")
     category = Category.objects.all()
     user = request.user
     return render(request, "review.html",{'reviews':reviews, 'user':user, 'category':category})
 
 def filter(request, id): 
-    reviews = Comment.objects.filter(restaurant__category__id__contains = id)
+    reviews = Comment.objects.filter(restaurant__category__id__contains = id).order_by("-created_at")
     category = Category.objects.all()
     user = request.user
     return render(request, "filter.html",{'reviews':reviews, 'user':user, 'category':category})

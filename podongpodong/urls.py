@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from podongpodong import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls), # admin
     path('', views.main, name="main"),
@@ -25,4 +26,4 @@ urlpatterns = [
     path('users/',include('users.urls')),
     path('accounts/',include('allauth.urls')),
     path('board/',include('board.urls')), # 건의함
-]
+]  
