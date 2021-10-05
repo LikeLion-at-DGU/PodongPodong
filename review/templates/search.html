@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<table class="table">
+  <thead>
+      <tr class="thead">
+          <th width=10%>순번</th>
+          <th width=15%>식당</th>
+          <th width=15%>메뉴</th>
+          <th width=35%>제목</th>
+          <th width=15%>작성자</th>
+          <th>좋아요</th>
+      </tr>
+  </thead>
+  <tbody>
+  {% for review in reviews %}
+      <tr onclick="location.href='{% url 'restaurant:restaurant_detail' review.restaurant.id %}'">
+          <td>{{ forloop.revcounter }}</td>
+          <td>{{review.restaurant.name}}</td>
+          <td>{{review.menu}}</td>
+          <td>{{review.content}}</td>
+          <td>{{user}}</td>
+          <td></td>
+      </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

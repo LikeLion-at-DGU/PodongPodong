@@ -39,8 +39,8 @@
                     aria-controls="nav-home"
                     aria-selected="true"
                   >
-                    <i class="fas fa-motorcycle me-2"></i>
-                    Delivery
+                  <i class="bi bi-shop"></i>
+                    &nbsp; 식당
                   </button>
                   <button
                     class="nav-link mb-3"
@@ -52,8 +52,8 @@
                     aria-controls="nav-profile"
                     aria-selected="false"
                   >
-                    <i class="fas fa-shopping-bag me-2"></i>
-                    Pickup
+                  <i class="bi bi-chat-left-dots"></i>
+                    &nbsp; 후기
                   </button>
                 </div>
               </nav>
@@ -64,26 +64,21 @@
                   role="tabpanel"
                   aria-labelledby="nav-home-tab"
                 >
-                  <form class="row gx-2 gy-2 align-items-center">
-                    <div class="col">
-                      <div class="input-group-icon">
-                        <i
-                          class="fas fa-map-marker-alt text-danger input-box-icon"
-                        ></i>
-                        <label class="visually-hidden" for="inputDelivery">
-                          Address
-                        </label>
-                        <input
-                          class="form-control input-box form-foodwagon-control"
-                          id="inputDelivery"
-                          type="text"
-                          placeholder="Enter Your Address"
-                        />
-                      </div>
+                  <form action="{% url 'restaurant:search_resturant' %}" method="GET" class="row gx-2 gy-2 align-items-center">
+                    <div class="input-group-icon pe-2">
+                      <i class="fas fa-search input-box-icon text-primary"></i>
+                      <input
+                        class="form-control border-0 input-box bg-100"
+                        placeholder="Search Shop"
+                        aria-label="Search"
+                        id="search_key"
+                        name="search_key"
+                        value="{{ search_key }}"
+                      />
                     </div>
-                    <div class="d-grid gap-3 col-sm-auto">
+                    <div class="d-grid gap-3 col-lg-12 col-sm-12">
                       <button class="btn btn-danger" type="submit">
-                        Find Food
+                        식당 검색하기
                       </button>
                     </div>
                   </form>
@@ -94,29 +89,25 @@
                   role="tabpanel"
                   aria-labelledby="nav-profile-tab"
                 >
-                  <form class="row gx-4 gy-2 align-items-center">
-                    <div class="col">
-                      <div class="input-group-icon">
-                        <i
-                          class="fas fa-map-marker-alt text-danger input-box-icon"
-                        ></i>
-                        <label class="visually-hidden" for="inputPickup">
-                          Address
-                        </label>
-                        <input
-                          class="form-control input-box form-foodwagon-control"
-                          id="inputPickup"
-                          type="text"
-                          placeholder="Enter Your Address"
-                        />
-                      </div>
-                    </div>
-                    <div class="d-grid gap-3 col-sm-auto">
-                      <button class="btn btn-danger" type="submit">
-                        Find Food
-                      </button>
-                    </div>
-                  </form>
+                <form action="{% url 'review:SearchReview' %}" method="GET" class="row gx-2 gy-2 align-items-center">
+                  <div class="input-group-icon pe-2">
+                    <i class="fas fa-search input-box-icon text-primary"></i>
+                    <input
+                      class="form-control border-0 input-box bg-100"
+                      type="search"
+                      placeholder="Search Review"
+                      aria-label="Search"
+                      name="search_key"
+                      id="search_key"
+                      value="{{ search_key }}"
+                    />
+                  </div>
+                  <div class="d-grid gap-3 col-lg-12 col-sm-12">
+                    <button class="btn btn-danger" type="submit">
+                      후기 검색하기
+                    </button>
+                  </div>
+                </form>
                 </div>
               </div>
             </div>

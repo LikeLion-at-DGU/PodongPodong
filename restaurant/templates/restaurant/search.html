@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+{% if restaurant_list %}
+<section id="testimonial">
+  <div class="container">
+    <p>"{{ search_key }}"의 검색 결과입니다.</p>
+      <div class="row h-100">
+          <div class="col-lg-7 mx-auto text-center mb-6">
+              <div class="responsive">
+                  <a href="{% url 'restaurant:restaurant_list' %}" style="border:1px solid #ced4da; border-radius: 4px; margin: 5px;">
+                      전체
+                  </a>
+                  {% for category in category %}
+                      <a href="{% url 'restaurant:restaurant_list2' category.id %}" style="border:1px solid #ced4da; border-radius: 4px; margin: 5px;">
+                          {{ category.name }}
+                      </a>
+                  {% endfor %}
+              </div>
+          </div>
+      </div>
+      <!-- 식당 리스트 -->
+      <div class="row gx-2">
+          {% for restaurant in restaurant_list %}
+              <div class="col-sm-6 col-md-3 col-lg-3 h-100 mb-5">
+                  <a href="{{ restaurant.get_absolute_url }}" >
+                      <div class="card card-span h-100 text-white rounded-3">
+                          <img class="img-fluid rounded-3 h-100" src="{% static 'img/gallery/food-world.png' %}"/>
+                          <div class="card-body ps-0">
+                              <div class="d-flex align-items-center mb-3">
+                                  <div class="flex-1 ms-3">
+                                      <h5 class="mb-0 fw-bold text-1000">{{ restaurant.name }}</h5>
+                                      <span class="text-primary fs--1 me-1">
+                                          <i class="fas fa-location-arrow"></i>
+                                      </span>
+                                      <span class="mb-0 text-primary">{{ restaurant.location }}</span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </a>
+              </div>
+          {% endfor %}
+
+          <div class="list-group">
+              {% for restaurant in restaurant_list %}
+                  <a href="{{ restaurant.get_absolute_url }}" class="list-group-item list-group-item-action">
+                      <div class="d-flex w-100 justify-content-between">
+                          <h5 class="mb-1">{{ restaurant.name }}</h5>
+                      </div>
+                      <p class="mb-1">
+                          <span class="text-primary fs--1 me-1">
+                              <i class="fas fa-location-arrow"></i>
+                          </span>
+                          {{ restaurant.location }}
+                      </p>
+                  </a>
+              {% endfor %}
+          </div>
+      </div>
+  </div>
+</section>
+{% else %}
+<p>"{{ search_key }}"의 검색 결과가 없습니다.</p>
+{% endif %}
+
+<div class="page">
+  {% if pages.has_previous %}
+      <a href="?page=1">1</a>
+      <a href="?page={{pages.previous_page_number}}">◀</a>
+      {% endif %}
+
+      <span>{{pages.number}}</span>
+      <span>of</span>
+      <span>{{pages.paginator.num_pages}}</span>
+
+      {% if pages.has_next %}
+      <a href="?page={{pages.next_page_number}}">▶</a>
+      <a href="?page={{pages.paginator.num_pages}}">{{pages.paginator.num_pages}}</a>
+  {% endif %}
+</div>
+
+<script type="text/javascript">
+  $('.responsive').slick({
+      dots: false,
+      infinite: false,
+      speed: 300,
+      slidesToShow: 6,
+      slidesToScroll: 1,
+      responsive: [
+          {
+              breakpoint: 1024,
+              settings: {
+                  slidesToShow: 6,
+                  slidesToScroll: 1
+              }
+          },
+          {
+              breakpoint: 600,
+                  settings: {
+                      slidesToShow: 4,
+                      slidesToScroll: 2
+                  }
+              },
+          {
+          breakpoint: 480,
+              settings: {
+                  slidesToShow: 4,
+                  slidesToScroll: 2
+              }
+          }
+      ]
+  });
+</script>
+
+{% endblock %}
