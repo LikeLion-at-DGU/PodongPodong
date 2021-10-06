@@ -11,14 +11,14 @@
         <div class = 'board_new'>
             <form action = "{% url 'board:request_create' %}" method="POST">
                 {%csrf_token%}
-                <p id = "new">제목</p>
-                <input type="text"  name="title">
-                <p id = "new">식당 이름</p>
-                <input type="text"  name="cafeteria" >
-                <p id = "new">비고</p>
+                <p id = "new"><strong>제목</strong></p>
+                <input type="text"  name="title" placeholder="제목을 입력해주세요" style="width:20%">
+                <p id = "new"><strong>식당 이름</strong></p>
+                <input type="text"  name="cafeteria" placeholder="식당 이름을 입력해주세요" style="width:20%">
+                <p id = "new"><strong>비고</strong></p>
                 <textarea name="body" cols="30" rows="10"></textarea>
-                <br>
-                <button type='submit'>제출</button>
+                <br><br>
+                <button type='submit' style = 'font-size:20px; width:6%;'>제출</button>
             </form>
         </div>
     </div>
