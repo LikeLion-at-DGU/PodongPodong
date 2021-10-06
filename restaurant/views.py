@@ -1,6 +1,10 @@
+from django.core import paginator
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
 from restaurant.models import Category, Restaurant, FoodMenu, Comment
+
+from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 # 식당보기 > 식당 리스트가 나오는 페이지
@@ -64,3 +68,21 @@ def CreateRestaurantComment(request, id):
         review_image = request.POST.get('review_image')
         Comment.objects.create(restaurant=restaurant, menu=menu, content=review_content, thumbnail=review_image)
     return redirect('restaurant:restaurant_detail', id)
+
+
+# 식당명 검색
+def SearchRestaurant(request):
+    # 카테고리
+    category = Category.objects.all()
+    # 검색어 가져오기
+    search_key = request.GET.get('search_key')
+    # 해당 검색어를 포함한 query 가져오기
+    if search_key:
+        list = Restaurant.objects.filter(Q(name__icontains=search_key)).distinct().order_by('-id')
+    else:
+        list = Restaurant.objects.all()
+    print(list)
+    # paginator = Paginator(list, 5)
+    # page = request.Get.get('page')
+    # pages = paginator.get_page(page)
+    return render(request, 'restaurant/search.html', { 'restaurant_list': list, "search_key": search_key, "category": category })
