@@ -76,11 +76,13 @@ def SearchRestaurant(request):
     category = Category.objects.all()
     # 검색어 가져오기
     search_key = request.GET.get('search_key')
-    list = Restaurant.objects.all()
     # 해당 검색어를 포함한 query 가져오기
     if search_key:
-        list = list.filter(Q(name__icontains=search_key)).distinct().order_by('-id')
-    paginator = Paginator(list, 5)
-    page = request.Get.get('page')
-    pages = paginator.get_page(page)
-    return render(request, 'restaurant/search.html', { 'restaurant_list': list, "search_key": search_key, "pages": pages, "category": category })
+        list = Restaurant.objects.filter(Q(name__icontains=search_key)).distinct().order_by('-id')
+    else:
+        list = Restaurant.objects.all()
+    print(list)
+    # paginator = Paginator(list, 5)
+    # page = request.Get.get('page')
+    # pages = paginator.get_page(page)
+    return render(request, 'restaurant/search.html', { 'restaurant_list': list, "search_key": search_key, "category": category })

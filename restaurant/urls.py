@@ -10,5 +10,5 @@ urlpatterns = [
     path('<int:id>/create_comment', CreateRestaurantComment, name='create_restaurant_comment'),
 
     # 식당 검색
-    path('search/', SearchRestaurant, name='search_resturant'),
+    path('restaurant/search/', SearchRestaurant, name='search_resturant'),
 ]
