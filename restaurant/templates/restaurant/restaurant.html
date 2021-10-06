@@ -7,6 +7,27 @@
     <div class="container">
         <div class="row h-100">
             <div class="col-lg-7 mx-auto text-center mb-6">
+
+                <h5 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3">팔로우</h5>
+                현재 로그인 사용자가 팔로우한 식당 목록 {{ request.user.follow_restaurants.all }}<br>
+                현재 식당의 팔로우 사용자 목록 {{ restaurant.follow_users.all }}<br>
+
+                {% with restaurant_follow_users=restaurant.follow_users.all %}
+                    {% if request.user in restaurant_follow_users %}
+                        <a href="{% url 'restaurant:followRestaurant' restaurant.id %}">
+                        <i class="fas fa-heart fa-sm animated delay-1s" style="color: red;"></i>
+                        </a>
+                    {% elif user.is_authenticated %}
+                        <a href="{% url 'restaurant:followRestaurant' restaurant.id %}">
+                        <i class="far fa-heart fa-sm animated infinite bounce delay-1s" style="color: gray;"></i>
+                        </a>
+                    {% else %}
+                        <i class="far fa-heart fa-sm animated infinite bounce delay-1s" style="color: gray;"></i>
+                    {% endif %}
+                    <span>  + {{ restaurant_follow_users|length }} </span>
+                {% endwith %}
+
+
                 <h5 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3">식당정보</h5>
                 {{ restaurant.category }}
                 {{ restaurant.name }}
@@ -40,8 +61,42 @@
 
             <h5>후기 목록</h5>
             {% for comment in comment_list %}
-                {{ comment.restaurant.name }} / {{ comment.menu.name }} / {{ comment.content }} <br/>
+                <span>
+                    {{ comment.restaurant.name }} / {{ comment.menu.name }} / {{ comment.content }} / {{ comment.user.username }}
+
+                    {% with comment_like_users=comment.like_users.all %}
+                        {% if request.user in comment_like_users %}
+                            <a href="{% url 'restaurant:likeComment' restaurant.id comment.id %}">
+                            <i class="fas fa-thumbs-up" style="color: red;"></i>
+                            </a>
+                        {% elif user.is_authenticated %}
+                            <a href="{% url 'restaurant:likeComment' restaurant.id comment.id %}">
+                            <i class="far fa-thumbs-up" style="color: gray;"></i>
+                            </a>
+                        {% else %}
+                            <i class="far fa-thumbs-up" style="color: gray;"></i>
+                        {% endif %}
+                        {{ comment.like_users.count }}
+                    {% endwith %}
+
+                    {% with comment_hate_users=comment.hate_users.all %}
+                        {% if request.user in comment_hate_users %}
+                            <a href="{% url 'restaurant:hateComment' restaurant.id comment.id %}">
+                            <i class="fas fa-thumbs-down" style="color: blue;"></i>
+                            </a>
+                        {% elif user.is_authenticated %}
+                            <a href="{% url 'restaurant:hateComment' restaurant.id comment.id %}">
+                            <i class="far fa-thumbs-down" style="color: gray;"></i>
+                            </a>
+                        {% else %}
+                            <i class="far fa-thumbs-down" style="color: gray;"></i>
+                        {% endif %}
+                        {{ comment.hate_users.count }}
+                    {% endwith %}
+                </span>
             {% endfor %}
+
+
         </div>
     </div>
 </section>

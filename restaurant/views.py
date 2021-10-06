@@ -66,7 +66,8 @@ def CreateRestaurantComment(request, id):
         review_menu = request.POST.get('review_menu')
         menu = get_object_or_404(FoodMenu, id=review_menu)
         review_image = request.POST.get('review_image')
-        Comment.objects.create(restaurant=restaurant, menu=menu, content=review_content, thumbnail=review_image)
+        review_user = request.user
+        Comment.objects.create(restaurant=restaurant, menu=menu, content=review_content, thumbnail=review_image, user=review_user)
     return redirect('restaurant:restaurant_detail', id)
 
 
@@ -86,3 +87,33 @@ def SearchRestaurant(request):
     # page = request.Get.get('page')
     # pages = paginator.get_page(page)
     return render(request, 'restaurant/search.html', { 'restaurant_list': list, "search_key": search_key, "category": category })
+
+
+# 식당 팔로우 하기
+def followRestaurant(request, pk):
+    restaurant = get_object_or_404(Restaurant, pk=pk)
+    if request.user in restaurant.follow_users.all():
+        restaurant.follow_users.remove(request.user)
+    else:
+        restaurant.follow_users.add(request.user)
+    return redirect('restaurant:restaurant_detail', pk)
+
+
+# 식당의 후기에 추천 하기
+def likeComment(request, pk, id):
+    comment = get_object_or_404(Comment, id=id)
+    if request.user in comment.like_users.all():
+        comment.like_users.remove(request.user)
+    else:
+        comment.like_users.add(request.user)
+    return redirect('restaurant:restaurant_detail', pk)
+
+
+# 식당의 후기에 비추천 하기
+def hateComment(request, pk, id):
+    comment = get_object_or_404(Comment, id=id)
+    if request.user in comment.hate_users.all():
+        comment.hate_users.remove(request.user)
+    else:
+        comment.hate_users.add(request.user)
+    return redirect('restaurant:restaurant_detail', pk)
