@@ -1,37 +1,61 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<style>
-    section {
-        margin-top: 150px;
-    }
-</style>
+<link rel="stylesheet" href="{% static 'css/components/review_search.css' %}">
 
-<section>
-    <table class="table">
-        <thead>
-            <tr class="thead">
-                <th width=10%>순번</th>
-                <th width=15%>식당</th>
-                <th width=15%>메뉴</th>
-                <th width=35%>제목</th>
-                <th width=15%>작성자</th>
-                <th>좋아요</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for review in reviews %}
-            <tr onclick="location.href='{% url 'restaurant:restaurant_detail' review.restaurant.id %}'">
-                <td>{{ forloop.revcounter }}</td>
-                <td>{{review.restaurant.name}}</td>
-                <td>{{review.menu}}</td>
-                <td>{{review.content}}</td>
-                <td>{{user}}</td>
-                <td></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<section class="py-0 bg-primary-gradient">
+    <div class="container">
+        <div class="row justify-content-center g-0">
+            <div class="col-xl-9">
+                <p id="searchkey">"{{ search_key }}"의 검색 결과입니다.</p>
+                <table class="table">
+                    <thead>
+                        <tr class="thead">
+                            <th width=10%>순번</th>
+                            <th width=15%>식당</th>
+                            <th width=15%>메뉴</th>
+                            <th width=35%>제목</th>
+                            <th width=15%>작성자</th>
+                            <th>좋아요</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% if reviews %}
+                        {% for review in reviews %}
+                            <tr onclick="location.href='{% url 'restaurant:restaurant_detail' review.restaurant.id %}'">
+                                <td>{{ forloop.revcounter }}</td>
+                                <td>{{review.restaurant.name}}</td>
+                                <td>{{review.menu}}</td>
+                                <td>{{review.content}}</td>
+                                <td>{{user}}</td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6" rowspan="3" style="text-align: center;">검색 후기가 없습니다.</td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </section>
+
+<div class="page middle">
+    {% if pages.has_previous %}
+    <a href="?page={{pages.previous_page_number}}" class="page_click active">◀ 이전</a>
+    {% else %}
+    <a class="page_click nonactive">◀ 이전</a>
+    {% endif %}
+
+    {% if pages.has_next %}
+    <a href="?page={{pages.next_page_number}}" class="page_click active">다음 ▶</a>
+    {% else %}
+    <a class="page_click nonactive">다음 ▶</a>
+    {% endif %}
+</div>
+
 
 {% endblock %}

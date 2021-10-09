@@ -2,8 +2,14 @@
     text-align:right;
 }
 
+.board_content h5{
+    text-align:center;
+}
+
 .board_content h2{
     text-align:center;
+    color:#F17228;
+    margin-top:20px;
 }
 
 .board_table{
@@ -19,8 +25,9 @@
     padding:20px;
     font-weight:bold;
     vertical-align:top;
-    color:black;
-    background:lightsalmon;
+    color:white;
+    background:#F17228;
+    opacity:0.9;
 }
 
 #board_num{
@@ -63,4 +70,77 @@
 
 .detail_head {
     padding: 10px 0px;
+}
+
+/* 글쓰기 버튼 */
+@import url(https://fonts.googleapis.com/css?family=BenchNine:700);
+.board_write {
+  background-color: #F17228;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'BenchNine', Arial, sans-serif;
+  font-size: 1em;
+  font-size: 22px;
+  line-height: 1em;
+  margin: 15px 40px;
+  outline: none;
+  padding: 9px 30px 7.5px;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.board_write:before,
+.board_write:after {
+  border-color: transparent;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+  border-style: solid;
+  border-width: 0;
+  content: "";
+  height: 24px;
+  position: absolute;
+  width: 24px;
+}
+.board_write:before {
+  border-color: #F17228;
+  border-right-width: 2px;
+  border-top-width: 2px;
+  right: -5px;
+  top: -5px;
+}
+.board_write:after {
+  border-bottom-width: 2px;
+  border-color: #F17228;
+  border-left-width: 2px;
+  bottom: -5px;
+  left: -5px;
+}
+.board_write:hover,
+.board_write.hover {
+  background-color: #F17228;
+}
+.board_write:hover:before,
+.board_write.hover:before,
+.board_write:hover:after,
+.board_write.hover:after {
+  height: 100%;
+  width: 100%;
+}
+
+/* 제출 버튼 */
+.board_new button, .board_edit button {
+    background-color:#F17228;
+    opacity:0.9;
+    border-radius: 12px;
+    border:none;
+}
+
+.board_detail button{
+    background-color:#F17228;
+    opacity:0.9;
+    border-radius: 12px;
+    border:none;
+    width:6%;
 }
