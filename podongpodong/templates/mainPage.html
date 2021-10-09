@@ -828,11 +828,12 @@
                           </span>
                           <span class="text-primary">{{review.restaurant.name}}</span>
                         </div>
-                        <span class="text-1000 fw-bold">{{review.menu.price}}</span>
+                        <span class="text-1000 fw-bold">{{review.menu.price}}</span><br>
+                        <span class="text-1000 fw-bold">종아요:{{review.like_users.count}}개</span>
                       </div>
                     </div>
                     <div class="d-grid gap-2">
-                      <a class="btn btn-lg btn-danger" href="{% url 'restaurant:restaurant_detail' review.restaurant.id %}" role="button" style="width: 100%;">
+                      <a class="btn btn-lg btn-danger" href="{% url 'restaurant:restaurant_detail' review.restaurant.id %}" role="button">
                         상세보기
                       </a>
                     </div>
