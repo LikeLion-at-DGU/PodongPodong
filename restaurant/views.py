@@ -81,7 +81,6 @@ def SearchRestaurant(request):
         list = Restaurant.objects.filter(Q(name__icontains=search_key)).distinct().order_by('-id')
     else:
         list = Restaurant.objects.all()
-    print(list)
     paginator = Paginator(list, 10)
     page = request.GET.get("page") or 1
     pages = paginator.get_page(page)
