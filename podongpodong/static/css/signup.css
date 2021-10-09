@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #222222;
+}
+body::before{
+    content: "";
+    position: absolute; z-index: 1;
+    top: 0; right: 0; bottom:0; left:0;
+    background: #222222;
+}
+.signup-form{
+    position: relative; z-index: 2;
+    width: 400px;
+}
+.signup-form h1{
+    font-size: 32px;
+    text-align: center;
+}
+.signup-form h1 a{
+    color: #fff;
+    text-decoration: none;
+}
+.int-area{
+    width: 400px;
+    position: relative;
+    margin-top: 20px;
+}
+.int-area:first-child {margin-top: 0;}
+.int-area input{
+    width: 100%;
+    padding: 15px 10px 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #999;
+    font-size: 18px; color: #fff;
+    outline: none;
+}
+.sel-area{
+    float: left;
+    width: 200px;
+    position: relative;
+    margin-top: 20px;
+}
+.sel-area label {
+    margin-left: 5px;
+    color:#fff;
+}
+.sel-area select {
+    width: 90%;
+    padding: 15px 10px 10px;
+    background-color: #ffc107;
+    border: none;
+    border-bottom: 1px solid #999;
+    font-size: 18px; color: #fff;
+    outline: none;
+}
+.num {
+    float: left;
+    width: 45%;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.int-area label{
+    position: absolute; left: 10px; top: 15px;
+    font-size: 18px; color:#fff;
+    transition: top .5s ease;
+}
+.int-area input:focus + label,
+.int-area input:valid + label {
+    top: -2px;
+    font-size: 13px; color: #97df11;
+}
+.btn-area {
+    margin-top: 30px;
+}
+.btn-area input {
+    width: 100%; height: 50px;
+    background-color: #97df11;
+    color:#fff;
+    font-size: 20px;
+    border:none;
+    border-radius: 10px;
+}
+.caption{
+    text-align: center;
+    color:#fff;
+}
+.caption a {
+    text-decoration: none;
+}
+a:link{
+    color:#97df11;
+}
+a:visited{
+    color:#97df11;
+}
+a:hover{
+    text-decoration: underline;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
