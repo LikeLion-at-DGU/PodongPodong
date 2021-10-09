@@ -1,0 +1,33 @@
+section {
+  margin-top: 100px;
+  min-height: 400px;
+}
+table {
+  margin-top: 10%;
+}
+.searchkey {
+  position: relative;
+  padding-top: 10px;
+}
+.middle{
+  text-align: center;
+  margin-bottom: 5%;
+}
+.middle a {
+  margin: 20px;
+  padding: 10px;
+}
+.number {
+  font-size: 20px;
+}
+.active {
+  transition-duration: 0.2s;
+}
+.active:hover {
+  color: #FFB310;
+  cursor: pointer;
+}
+.nonactive {
+  color: #a4a4a4;
+  cursor: pointer;
+}

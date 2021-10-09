@@ -3,6 +3,7 @@ from django.shortcuts import render
 from restaurant.models import *
 
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -24,4 +25,13 @@ def SearchReview(request):
     category = Category.objects.all()
     if search_key:
         reviews = reviews.filter(Q(content__icontains=search_key)).distinct().order_by('-id')
-    return render(request, "search.html", { 'reviews': reviews, 'category': category })
+    paginator = Paginator(reviews, 10)
+    page = request.GET.get("page") or 1
+    pages = paginator.get_page(page)
+    context = {
+        'reviews': reviews,
+        'category': category, 
+        'search_key': search_key, 
+        'pages': pages
+    }
+    return render(request, "search.html", context)

@@ -1,4 +1,3 @@
-from django.core import paginator
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
 from restaurant.models import Category, Restaurant, FoodMenu, Comment
@@ -82,11 +81,10 @@ def SearchRestaurant(request):
         list = Restaurant.objects.filter(Q(name__icontains=search_key)).distinct().order_by('-id')
     else:
         list = Restaurant.objects.all()
-    print(list)
-    # paginator = Paginator(list, 5)
-    # page = request.Get.get('page')
-    # pages = paginator.get_page(page)
-    return render(request, 'restaurant/search.html', { 'restaurant_list': list, "search_key": search_key, "category": category })
+    paginator = Paginator(list, 10)
+    page = request.GET.get("page") or 1
+    pages = paginator.get_page(page)
+    return render(request, 'restaurant/search.html', { 'restaurant_list': list, "search_key": search_key, "pages": pages, "category": category })
 
 
 # 식당 팔로우 하기
