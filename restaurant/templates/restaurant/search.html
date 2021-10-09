@@ -1,6 +1,30 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+<style>
+    .middle{
+        text-align: center;
+        margin-bottom: 5%;
+    }
+    .middle a {
+        margin: 20px;
+        padding: 10px;
+    }
+    .number {
+        font-size: 20px;
+    }
+    .active {
+        transition-duration: 0.2s;
+    }
+    .active:hover {
+        color: #FFB310;
+        cursor: pointer;
+    }
+    .nonactive {
+        color: #a4a4a4;
+        cursor: pointer;
+    }
+</style>
 
 {% if restaurant_list %}
 <section id="testimonial">
@@ -51,20 +75,18 @@
 <p>"{{ search_key }}"의 검색 결과가 없습니다.</p>
 {% endif %}
 
-<div class="page">
-  {% if pages.has_previous %}
-      <a href="?page=1">1</a>
-      <a href="?page={{pages.previous_page_number}}">◀</a>
-      {% endif %}
+<div class="page middle">
+    {% if pages.has_previous %}
+    <a href="?page={{pages.previous_page_number}}" class="page_click active">◀ 이전</a>
+    {% else %}
+    <a class="page_click nonactive">◀ 이전</a>
+    {% endif %}
 
-      <span>{{pages.number}}</span>
-      <span>of</span>
-      <span>{{pages.paginator.num_pages}}</span>
-
-      {% if pages.has_next %}
-      <a href="?page={{pages.next_page_number}}">▶</a>
-      <a href="?page={{pages.paginator.num_pages}}">{{pages.paginator.num_pages}}</a>
-  {% endif %}
+    {% if pages.has_next %}
+    <a href="?page={{pages.next_page_number}}" class="page_click active">다음 ▶</a>
+    {% else %}
+    <a class="page_click nonactive">다음 ▶</a>
+    {% endif %}
 </div>
 
 <script type="text/javascript">
