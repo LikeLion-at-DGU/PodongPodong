@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.shortcuts import render
-from restaurant.models import *
+from restaurant.models import Comment, Category
 
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -11,13 +11,31 @@ def review(request):
     reviews = Comment.objects.all().order_by("-created_at")
     category = Category.objects.all()
     user = request.user
-    return render(request, "review.html",{'reviews':reviews, 'user':user, 'category':category})
+    paginator = Paginator(reviews, 10)
+    page = request.GET.get("page") or 1
+    pages = pages = paginator.get_page(page)
+    context = {
+        'reviews':reviews,
+        'user':user,
+        'category':category,
+        'pages':pages,
+    }
+    return render(request, "review.html",context)
 
 def filter(request, id): 
     reviews = Comment.objects.filter(restaurant__category__id__contains = id).order_by("-created_at")
     category = Category.objects.all()
     user = request.user
-    return render(request, "filter.html",{'reviews':reviews, 'user':user, 'category':category})
+    paginator = Paginator(reviews, 10)
+    page = request.GET.get("page") or 1
+    pages = pages = paginator.get_page(page)
+    context = {
+        'reviews':reviews,
+        'user':user,
+        'category':category,
+        'pages':pages,
+    }
+    return render(request, "filter.html",context)
 
 def SearchReview(request):
     search_key = request.GET.get('search_key')
