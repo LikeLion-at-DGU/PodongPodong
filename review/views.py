@@ -1,14 +1,16 @@
+from typing import Counter
 from django.shortcuts import get_object_or_404, render, redirect
 from django.shortcuts import render
 from restaurant.models import Comment, Category
 
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.db.models import Count
 
 # Create your views here.
 
 def review(request):
-    reviews = Comment.objects.all().order_by("-like_users", "-created_at")
+    reviews = Comment.objects.all().annotate(like_count = Count('like_users')).order_by("-like_count", "-created_at")
     category = Category.objects.all()
     user = request.user
     paginator = Paginator(reviews, 10)
@@ -23,7 +25,7 @@ def review(request):
     return render(request, "review.html",context)
 
 def filter(request, id): 
-    reviews = Comment.objects.filter(restaurant__category__id__contains = id).order_by("-like_users", "-created_at")
+    reviews = Comment.objects.filter(restaurant__category__id__contains = id).annotate(like_count = Count('like_users')).order_by("-like_count", "-created_at")
     category = Category.objects.all()
     user = request.user
     paginator = Paginator(reviews, 10)
