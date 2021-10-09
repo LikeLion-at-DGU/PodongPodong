@@ -1,0 +1,45 @@
+<body>
+    <div class="box">
+        <section class="logout-page">
+            <div class="logout-sec">
+              <form class="logout" method="POST" action="/accounts/logout/">
+                {% csrf_token %}
+                <p>정말 로그아웃 하시겠습니까?</p>
+                <div class="btn-area">
+                    <input type="submit" value="로그아웃">
+                </div>
+            </form>
+            </div>
+        </section>
+    </div>
+</body>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+body{
+    background:#191919;
+}
+.logout-page{
+    font-family: 'Noto Sans JP', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.logout-page p{
+    font-size: 30px;
+    margin-bottom: 50px;
+    color: #fff;
+}
+.btn-area{
+    text-align: center;
+}
+.btn-area input{
+    background-color: #e32879;
+    color: #FFF;
+    font-size: 20px;
+    border: none; 
+    border-radius: 10px; 
+    width: 200px;
+    height: 50px;
+}
+</style>
