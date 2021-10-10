@@ -6,15 +6,13 @@
           <div class="col-lg-6 text-center mx-auto mb-3 mb-md-5 mt-4">
             <h5 class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6" style="margin-top:8rem !important;">식당 후기 보기</h5>
           </div>
-          <div class="row">
-            <div class="col-xs-3 col-md-2 mb-3">
-              <button class="bnt" onclick="location.href='{% url 'review:review' %}'">전체</button>
-            </div>
-            {% for category in category %}
-            <div class="col-xs-3 col-md-2 mb-3">
-              <button class="bnt" onclick="location.href='{% url 'review:filter' category.id %}'">{{category.name}}</button>
-            </div>
-            {% endfor %}
+          <div class="col-lg-7 mx-auto text-center mb-6">
+                <div class="responsive">
+                  <button class="bnt" onclick="location.href='{% url 'review:review' %}'">전체</button>
+                  {% for category in category %}             
+                    <button class="bnt" onclick="location.href='{% url 'review:filter' category.id %}'">{{category.name}}</button>
+                  {% endfor %}
+                </div>
           </div>
           <table class="table">
             <thead>
@@ -34,7 +32,7 @@
                     <td>{{review.restaurant.name}}</td>
                     <td>{{review.menu}}</td>
                     <td>{{review.content}}</td>
-                    <td>{{user}}</td>
+                    <td>{{review.user}}</td>
                     <td>{{review.like_users.count}}</td>
                 </tr>
             {% endfor %}
