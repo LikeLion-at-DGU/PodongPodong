@@ -43,7 +43,7 @@
 
 
             </div>
-
+            {% if user.is_authenticated %}
             <div>
                 <form action="{% url 'restaurant:create_restaurant_comment' restaurant.id %}" method="POST">
                     {%csrf_token%}
@@ -57,6 +57,7 @@
                     <input type="submit" value="확인">
                 </form>
             </div>
+            {% endif %}
 
 
             <h5>후기 목록</h5>

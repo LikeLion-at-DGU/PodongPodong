@@ -37,8 +37,21 @@
         <div>
             <h3><i class = 'material-icons'>description</i> 내가 쓴 후기</h3><hr>
             <!-- 이 밑에 코드 들어가면 될 듯! -->
+            <div class = 'list-group'>
+                {% for comment in comments %}
 
+                <a class="list-group-item list-group-item-action" href = "{% url 'restaurant:restaurant_detail' comment.restaurant.id %}">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">식당 이름: {{comment.restaurant.name}}</h5><br>
+                    </div>
+                        <p class="mb-1">메뉴: {{comment.menu}}<br></p>
+                        <p class = 'mb-1'>내용: {{comment.content}}<br></p>
+                        <p class = 'mb-1'>좋아요: {{comment.like_users.count}}<br></p>
+                        <p class = 'mb-1'>날짜: {{comment.created_at}}<br></p>
+                </a>
+                {% endfor %}
             <br><br>
+            </div>
         </div>
 
 
