@@ -60,7 +60,7 @@
                 MY Page
             </p>
             <div class="dropdown-content">
-              <a class="dropdown-item" href="{% url 'users:mypage' %}">Mypage</a></li>
+              <a class="dropdown-item" href="{% url 'users:mypage' request.user.id %}">Mypage</a></li>
               <a class="dropdown-item" href="{% url 'account_logout' %}">Logout </a></li>
             </div>
           </div> 

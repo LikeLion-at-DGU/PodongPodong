@@ -1,40 +1,56 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/components/restaurant_search.css'%}">
 
-<section>
+<section class="py-0 bg-primary-gradient">
     <div class = 'container'>
-        <div class = "board_main">
-            <div class = 'board_content'>
-                    <h2>식당 건의함</h2>
-                <div>
-                    <a href = "{% url 'board:request_new' %}"><button class = 'board_write'>글쓰기</button></a>
+        <div class="row justify-content-center g-0">
+            <div class="col-xl-9">
+                <div class="col-lg-6 text-center mx-auto mb-3 mb-md-5 mt-4">
+                    <h5 class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6" style="margin-top:10rem !important;">식당 건의함</h5>
                 </div>
-                <table class = 'board_table'>
-                    <thead>
-                        <tr>
-                            <th scope="col" id = 'board_num'>No.</th>
-                            <th scope="col" id = 'board_title'>제목</th>
-                            <th scope='col' id = 'board_cafeteria'>식당 이름</th>
-                            <th scope="col" id = 'board_writer'>작성자</th>
-                            <th scope="col" id = 'board_date'>작성날짜</th>
-                        </tr>
-                    </thead>
+                <div class = "board_main">
+                    <a href = "{% url 'board:request_new' %}"><button class = 'board_write'>글쓰기</button></a>
+                    <table class = 'board_table'>
+                        <thead>
+                            <tr>
+                                <th scope="col" id = 'board_num'>No.</th>
+                                <th scope="col" id = 'board_title'>제목</th>
+                                <th scope='col' id = 'board_cafeteria'>식당 이름</th>
+                                <th scope="col" id = 'board_writer'>작성자</th>
+                                <th scope="col" id = 'board_date'>작성날짜</th>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        {% for board in boards %}
-                        <tr>
-                            <td>{{ forloop.revcounter }}</td>
-                            <td><a id = 'board_title_a' href="{% url 'board:request_detail' board.id %}">{{board.title}}</a></td>
-                            <td>{{board.cafeteria}}</td>
-                            <td>{{board.writer}}</td>
-                            <td>{{board.date}}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-
+                        <tbody>
+                            {% for board in boards %}
+                            <tr>
+                                <td>{{ forloop.revcounter }}</td>
+                                <td><a id = 'board_title_a' href="{% url 'board:request_detail' board.id %}">{{board.title}}</a></td>
+                                <td>{{board.cafeteria}}</td>
+                                <td>{{board.writer}}</td>
+                                <td>{{board.date}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        
+        </div>
+        <div class="page middle">
+            {% if pages.has_previous %}
+            <a href="?page={{pages.previous_page_number}}" class="page_click active">◀ 이전</a>
+            {% else %}
+            <a class="page_click nonactive">◀ 이전</a>
+            {% endif %}
+        
+            {% if pages.has_next %}
+            <a href="?page={{pages.next_page_number}}" class="page_click active">다음 ▶</a>
+            {% else %}
+            <a class="page_click nonactive">다음 ▶</a>
+            {% endif %}
         </div>
     </div>
 </section>
