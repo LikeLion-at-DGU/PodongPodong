@@ -1,103 +1,171 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+{% load humanize %}
 
 
 <section id="testimonial">
     <div class="container">
         <div class="row h-100">
-            <div class="col-lg-7 mx-auto text-center mb-6">
+            <div class="col-lg-7 mx-auto mb-6">
+                    <div class="card mb-4">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="{{ restaurant.thumbnail.url }}" class="img-fluid rounded" width="100%">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body">
+                                    <p style="margin-bottom: 0.5em;">
+                                        <span>
+                                        {{ restaurant.name }}
+                                        </span>
+                                        <span style="margin-left: 80%;">
+                                            {% with restaurant_follow_users=restaurant.follow_users.all %}
+                                                {% if request.user in restaurant_follow_users %}
+                                                    <a href="{% url 'restaurant:followRestaurant' restaurant.id %}">
+                                                    <i class="fas fa-heart fa-sm animated delay-1s" style="color: red;"></i>
+                                                    </a>
+                                                {% elif user.is_authenticated %}
+                                                    <a href="{% url 'restaurant:followRestaurant' restaurant.id %}">
+                                                    <i class="far fa-heart fa-sm animated infinite bounce delay-1s" style="color: gray;"></i>
+                                                    </a>
+                                                {% else %}
+                                                    <i class="far fa-heart fa-sm animated infinite bounce delay-1s" style="color: gray;"></i>
+                                                {% endif %}
+                                            {% endwith %}
+                                        </span>
+                                    </p>
+                                    <p style="margin-bottom: 0.5em;">
+                                        <span class="text-primary fs--1 me-1">
+                                            <i class="fas fa-location-arrow"></i>
+                                        </span>
+                                        {{ restaurant.location }}
+                                    </p>
+                                    <p style="margin-bottom: 0.5em;">
+                                        <span class="text-primary fs--1 me-1">
+                                            <i class="fas fa-phone-alt"></i>
+                                        </span>
+                                        {{ restaurant.phone_number }}
+                                    </p>
+                                    <p style="margin-bottom: 0;">
+                                        <span class="text-primary fs--1 me-1">
+                                            <i class="fas fa-clock"></i>
+                                        </span>
+                                        {{ restaurant.business_open_hour }}
+                                        ~ {{ restaurant.business_close_hour }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <h5 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3">팔로우</h5>
-                현재 로그인 사용자가 팔로우한 식당 목록 {{ request.user.follow_restaurants.all }}<br>
-                현재 식당의 팔로우 사용자 목록 {{ restaurant.follow_users.all }}<br>
-
-                {% with restaurant_follow_users=restaurant.follow_users.all %}
-                    {% if request.user in restaurant_follow_users %}
-                        <a href="{% url 'restaurant:followRestaurant' restaurant.id %}">
-                        <i class="fas fa-heart fa-sm animated delay-1s" style="color: red;"></i>
-                        </a>
-                    {% elif user.is_authenticated %}
-                        <a href="{% url 'restaurant:followRestaurant' restaurant.id %}">
-                        <i class="far fa-heart fa-sm animated infinite bounce delay-1s" style="color: gray;"></i>
-                        </a>
-                    {% else %}
-                        <i class="far fa-heart fa-sm animated infinite bounce delay-1s" style="color: gray;"></i>
-                    {% endif %}
-                    <span>  + {{ restaurant_follow_users|length }} </span>
-                {% endwith %}
-
-
-                <h5 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3">식당정보</h5>
-                {{ restaurant.category }}
-                {{ restaurant.name }}
-                {{ restaurant.location }}
-                {{ restaurant.phone_number }}
-                {{ restaurant.business_open_hour }}
-                {{ restaurant.business_close_hour }}
-                {{ restaurant.thumbnail }}
-                <h5>메뉴정보</h5>
-                {% for food in menu_list %}
-                    {{ food.name}} / {{ food.price }} <br/>
-                {% endfor %}
-
-
-            </div>
-            {% if user.is_authenticated %}
-            <div>
-                <form action="{% url 'restaurant:create_restaurant_comment' restaurant.id %}" method="POST">
-                    {%csrf_token%}
-                    <textarea name="review_content" placeholder="후기를 입력해주세요:) "></textarea>
-                    <select name="review_menu">
+                <!-- 메뉴, 후기 NAV TAB 영역 -->
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-menu-tab" data-bs-toggle="tab" data-bs-target="#nav-menu" type="button" role="tab" aria-controls="nav-menu" aria-selected="true">M E N U</button>
+                        <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">R E V I E W</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-menu" role="tabpanel" aria-labelledby="nav-menu-tab" style="padding : 1em;">
+                        <!-- 메뉴 NAV 영역 -->
+                        <table width="100%;">
                         {% for food in menu_list %}
-                            <option value="{{ food.id }}">{{ food.name }}</option>
+                            <tr style="border: 1px solid #dee2e6;">
+                                <td style="width: 30%;">
+                                    <img src="{{ food.thumbnail.url }}" style="max-width: 80%;">
+                                </td>
+                                <td style="width: 70%;">
+                                    <h5>{{ food.name }}</h5>
+                                    <p >
+                                        <span class="text-primary fs--1 me-1">
+                                            <i class="fas fa-won-sign"></i>
+                                        </span>
+                                        {{ food.price | intcomma }}
+                                    </p>
+                                </td>
+                            </tr>
                         {% endfor %}
-                    </select>
-                    <input type="file" class="form-control" id="image" name="review_image">
-                    <input type="submit" value="확인">
-                </form>
+                        </table>
+                    </div>
+                    <!-- END 메뉴 TAB 영역 -->
+                    <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab" style="padding : 2em;">
+                        <!-- 후기 NAV 영역 -->
+                        <!-- 후기 신규 등록 -->
+                        {% if user.is_authenticated %}
+                        <div>
+                            <form class="row g-2" action="{% url 'restaurant:create_restaurant_comment' restaurant.id %}" method="POST" enctype="multipart/form-data">
+                                {%csrf_token%}
+                                    <select class="form-select" name="review_menu" id="review_menu">
+                                        {% for food in menu_list %}
+                                            <option value="{{ food.id }}">{{ food.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <input type="file" class="form-control" id="review_image" name="review_image">
+                                    <textarea class="form-control" name="review_content" id="review_content" rows="2" placeholder="후기를 입력해주세요:) "></textarea>
+                                <input type="submit" value="확인">
+                            </form>
+                        </div>
+                        {% endif %}
+
+                        <!-- 후기 목록 -->
+                        <div style="padding-top: 2em;">
+                            <table width="100%;">
+                            {% for comment in comment_list %}
+                                <tr style="border: 1px solid #dee2e6;">
+                                    <td style="width: 70%; text-align: left;">
+                                        <h5>
+                                            {{ comment.user.username }}
+                                            <!-- 추천 -->
+                                            {% with comment_like_users=comment.like_users.all %}
+                                                {% if request.user in comment_like_users %}
+                                                    <a href="{% url 'restaurant:likeComment' restaurant.id comment.id %}">
+                                                    <i class="fas fa-thumbs-up" style="color: red;"></i>
+                                                    </a>
+                                                {% elif user.is_authenticated %}
+                                                    <a href="{% url 'restaurant:likeComment' restaurant.id comment.id %}">
+                                                    <i class="far fa-thumbs-up" style="color: gray;"></i>
+                                                    </a>
+                                                {% else %}
+                                                    <i class="far fa-thumbs-up" style="color: gray;"></i>
+                                                {% endif %}
+                                                {{ comment.like_users.count }}
+                                            {% endwith %}
+                                            <!-- 비추천 -->
+                                            {% with comment_hate_users=comment.hate_users.all %}
+                                                {% if request.user in comment_hate_users %}
+                                                    <a href="{% url 'restaurant:hateComment' restaurant.id comment.id %}">
+                                                    <i class="fas fa-thumbs-down" style="color: blue;"></i>
+                                                    </a>
+                                                {% elif user.is_authenticated %}
+                                                    <a href="{% url 'restaurant:hateComment' restaurant.id comment.id %}">
+                                                    <i class="far fa-thumbs-down" style="color: gray;"></i>
+                                                    </a>
+                                                {% else %}
+                                                    <i class="far fa-thumbs-down" style="color: gray;"></i>
+                                                {% endif %}
+                                                {{ comment.hate_users.count }}
+                                            {% endwith %}
+
+                                        </h5>
+                                        {{ comment.content }}
+                                    </td>
+                                    <td style="width: 30%;">
+                                        {% if comment.thumbnail %}
+                                            <img src="{{ comment.thumbnail.url }}" style="max-width: 50%;">
+                                        {% else %}
+                                            <img src="{% static 'img/gallery/no image.jpg' %}" style="max-width: 50%;">
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                    <!-- END 후기 TAB 영역 -->
+                </div>
+                <!-- END 메뉴, 후기 NAV TAB 영역 -->
             </div>
-            {% endif %}
-
-
-            <h5>후기 목록</h5>
-            {% for comment in comment_list %}
-                <span>
-                    {{ comment.restaurant.name }} / {{ comment.menu.name }} / {{ comment.content }} / {{ comment.user.username }}
-
-                    {% with comment_like_users=comment.like_users.all %}
-                        {% if request.user in comment_like_users %}
-                            <a href="{% url 'restaurant:likeComment' restaurant.id comment.id %}">
-                            <i class="fas fa-thumbs-up" style="color: red;"></i>
-                            </a>
-                        {% elif user.is_authenticated %}
-                            <a href="{% url 'restaurant:likeComment' restaurant.id comment.id %}">
-                            <i class="far fa-thumbs-up" style="color: gray;"></i>
-                            </a>
-                        {% else %}
-                            <i class="far fa-thumbs-up" style="color: gray;"></i>
-                        {% endif %}
-                        {{ comment.like_users.count }}
-                    {% endwith %}
-
-                    {% with comment_hate_users=comment.hate_users.all %}
-                        {% if request.user in comment_hate_users %}
-                            <a href="{% url 'restaurant:hateComment' restaurant.id comment.id %}">
-                            <i class="fas fa-thumbs-down" style="color: blue;"></i>
-                            </a>
-                        {% elif user.is_authenticated %}
-                            <a href="{% url 'restaurant:hateComment' restaurant.id comment.id %}">
-                            <i class="far fa-thumbs-down" style="color: gray;"></i>
-                            </a>
-                        {% else %}
-                            <i class="far fa-thumbs-down" style="color: gray;"></i>
-                        {% endif %}
-                        {{ comment.hate_users.count }}
-                    {% endwith %}
-                </span>
-            {% endfor %}
-
-
         </div>
     </div>
 </section>

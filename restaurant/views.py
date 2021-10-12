@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
 from restaurant.models import Category, Restaurant, FoodMenu, Comment
@@ -14,13 +15,20 @@ class RestaurantListView(ListView):
     context_object_name = 'restaurant_list'
     # 템플릿 파일 위치 지정
     template_name = 'restaurant/category.html'
+    paginate_by = 1
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         # 현재 선택된 식당 분류
         context['category'] = Category.objects.all()
         # 선택된 식당 분류에 해당하는 식당 목록
-        context['restaurant_list'] = Restaurant.objects.all()
+        restaurant = Restaurant.objects.all()
+
+        page = self.request.GET.get('page', '1')
+        paginator = Paginator(restaurant, '1')
+        restaurant = paginator.page(page)
+
+        context['restaurant_list'] = restaurant
         return context
 
 
@@ -31,6 +39,11 @@ def RestaurantList(request, id):
     if id:
         current_category = get_object_or_404(Category, id=id)
         restaurant = Restaurant.objects.filter(category=current_category)
+
+    page = request.GET.get('page', '1')
+    paginator = Paginator(restaurant, '1')
+    restaurant = paginator.page(page)
+
     context = {'category': category, 'restaurant_list': restaurant}
     return render(request, 'restaurant/category.html', context)
 
@@ -58,13 +71,14 @@ class RestaurantDetailView(DetailView):
 
 
 # 식당 후기 등록
+@login_required
 def CreateRestaurantComment(request, id):
     if request.method == "POST":
         restaurant = get_object_or_404(Restaurant, id=id)
         review_content = request.POST.get('review_content')
         review_menu = request.POST.get('review_menu')
         menu = get_object_or_404(FoodMenu, id=review_menu)
-        review_image = request.POST.get('review_image')
+        review_image = request.FILES.get('review_image')
         review_user = request.user
         Comment.objects.create(restaurant=restaurant, menu=menu, content=review_content, thumbnail=review_image, user=review_user)
     return redirect('restaurant:restaurant_detail', id)
@@ -88,6 +102,7 @@ def SearchRestaurant(request):
 
 
 # 식당 팔로우 하기
+@login_required
 def followRestaurant(request, pk):
     restaurant = get_object_or_404(Restaurant, pk=pk)
     if request.user in restaurant.follow_users.all():
@@ -98,6 +113,7 @@ def followRestaurant(request, pk):
 
 
 # 식당의 후기에 추천 하기
+@login_required
 def likeComment(request, pk, id):
     comment = get_object_or_404(Comment, id=id)
     if request.user in comment.like_users.all():
@@ -108,6 +124,7 @@ def likeComment(request, pk, id):
 
 
 # 식당의 후기에 비추천 하기
+@login_required
 def hateComment(request, pk, id):
     comment = get_object_or_404(Comment, id=id)
     if request.user in comment.hate_users.all():
