@@ -58,6 +58,7 @@ def SearchReview(request):
         'reviews': reviews,
         'category': category, 
         'search_key': search_key, 
-        'pages': pages
+        'pages': pages,
+        'search_category':search_category,
     }
     return render(request, "search.html", context)
