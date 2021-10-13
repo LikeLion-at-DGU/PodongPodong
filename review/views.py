@@ -40,11 +40,17 @@ def filter(request, id):
     return render(request, "filter.html",context)
 
 def SearchReview(request):
+    search_category = request.GET.get('category')
     search_key = request.GET.get('search_key')
-    reviews = Comment.objects.all()
+    reviews = Comment.objects.all().annotate(like_count = Count('like_users')).order_by("-like_count", "-created_at")
     category = Category.objects.all()
     if search_key:
-        reviews = reviews.filter(Q(content__icontains=search_key)).distinct().order_by('-id')
+        if search_category == "restaurant":
+            reviews = reviews.filter(Q(restaurant__name__icontains=search_key))
+        elif search_category == "writer":
+            reviews = reviews.filter(Q(user__username__icontains=search_key))
+        else:
+            reviews = reviews.filter(Q(content__icontains=search_key))
     paginator = Paginator(reviews, 10)
     page = request.GET.get("page") or 1
     pages = paginator.get_page(page)
