@@ -47,10 +47,12 @@ def SearchReview(request):
     if search_key:
         if search_category == "restaurant":
             reviews = reviews.filter(Q(restaurant__name__icontains=search_key))
-        elif search_category == "writer":
-            reviews = reviews.filter(Q(user__username__icontains=search_key))
-        else:
+        elif search_category == "menu":
+            reviews = reviews.filter(Q(menu__name__icontains=search_key))
+        elif search_category == "title":
             reviews = reviews.filter(Q(content__icontains=search_key))
+        else:
+            reviews = reviews.filter(Q(content__icontains=search_key)|Q(restaurant__name__icontains=search_key)|Q(menu__name__icontains=search_key)|Q(content__icontains=search_key))
     paginator = Paginator(reviews, 10)
     page = request.GET.get("page") or 1
     pages = paginator.get_page(page)
