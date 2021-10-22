@@ -18,6 +18,25 @@
                 </div>
             </div>
         </div>
+        <form action="{% url 'restaurant:search_resturant' %}" method="GET" class="row gx-2 gy-2 align-items-center">
+            <div class="col-lg-3 input-group-icon pe-2">
+                <i class="fas fa-search input-box-icon text-primary"></i>
+                <input
+                    class="col-lg-3 form-control border-0 input-box bg-100"
+                    type="search"
+                    placeholder="Search Restaurant"
+                    aria-label="Search"
+                    name="search_key"
+                    id="search_key"
+                    value="{{ search_key }}"
+                />
+            </div>
+            <div class="d-grid gap-3 col-lg-2">
+                <button class="btn btn-danger" type="submit">
+                검색하기
+                </button>
+            </div>
+        </form>
         <!-- 식당 리스트 -->
         <table>
         {% for restaurant in restaurant_list %}
