@@ -71,19 +71,9 @@
                         <!-- 메뉴 NAV 영역 -->
                         <table width="100%;">
                         {% for food in menu_list %}
-                            <tr style="border: 1px solid #dee2e6;">
-                                <td style="width: 30%;">
-                                    <img src="{{ food.thumbnail.url }}" style="max-width: 80%;">
-                                </td>
-                                <td style="width: 70%;">
-                                    <h5>{{ food.name }}</h5>
-                                    <p >
-                                        <span class="text-primary fs--1 me-1">
-                                            <i class="fas fa-won-sign"></i>
-                                        </span>
-                                        {{ food.price | intcomma }}
-                                    </p>
-                                </td>
+                            <tr style="border-bottom: 1px solid #dee2e6;">
+                                <td style="padding:15px;">{{ food.name }}</td>
+                                <td style="padding:15px;" align="right">₩ {{ food.price | intcomma }}</td>
                             </tr>
                         {% endfor %}
                         </table>
@@ -112,49 +102,50 @@
                         <div style="padding-top: 2em;">
                             <table width="100%;">
                             {% for comment in comment_list %}
-                                <tr style="border: 1px solid #dee2e6;">
-                                    <td style="width: 70%; text-align: left;">
-                                        <h5>
-                                            {{ comment.user.username }}
-                                            <!-- 추천 -->
-                                            {% with comment_like_users=comment.like_users.all %}
-                                                {% if request.user in comment_like_users %}
-                                                    <a href="{% url 'restaurant:likeComment' restaurant.id comment.id %}">
-                                                    <i class="fas fa-thumbs-up" style="color: red;"></i>
-                                                    </a>
-                                                {% elif user.is_authenticated %}
-                                                    <a href="{% url 'restaurant:likeComment' restaurant.id comment.id %}">
-                                                    <i class="far fa-thumbs-up" style="color: gray;"></i>
-                                                    </a>
-                                                {% else %}
-                                                    <i class="far fa-thumbs-up" style="color: gray;"></i>
-                                                {% endif %}
-                                                {{ comment.like_users.count }}
-                                            {% endwith %}
-                                            <!-- 비추천 -->
-                                            {% with comment_hate_users=comment.hate_users.all %}
-                                                {% if request.user in comment_hate_users %}
-                                                    <a href="{% url 'restaurant:hateComment' restaurant.id comment.id %}">
-                                                    <i class="fas fa-thumbs-down" style="color: blue;"></i>
-                                                    </a>
-                                                {% elif user.is_authenticated %}
-                                                    <a href="{% url 'restaurant:hateComment' restaurant.id comment.id %}">
-                                                    <i class="far fa-thumbs-down" style="color: gray;"></i>
-                                                    </a>
-                                                {% else %}
-                                                    <i class="far fa-thumbs-down" style="color: gray;"></i>
-                                                {% endif %}
-                                                {{ comment.hate_users.count }}
-                                            {% endwith %}
-
-                                        </h5>
-                                        {{ comment.content }}
+                                <tr>
+                                    <td style="padding:5px;">{{ comment.user.username }}</td>
+                                    <td style="padding:5px;" align="right">
+                                        <!-- 추천 -->
+                                        {% with comment_like_users=comment.like_users.all %}
+                                            {% if request.user in comment_like_users %}
+                                                <a href="{% url 'restaurant:likeComment' restaurant.id comment.id %}">
+                                                <i class="fas fa-thumbs-up" style="color: red;"></i>
+                                                </a>
+                                            {% elif user.is_authenticated %}
+                                                <a href="{% url 'restaurant:likeComment' restaurant.id comment.id %}">
+                                                <i class="far fa-thumbs-up" style="color: gray;"></i>
+                                                </a>
+                                            {% else %}
+                                                <i class="far fa-thumbs-up" style="color: gray;"></i>
+                                            {% endif %}
+                                            {{ comment.like_users.count }}
+                                        {% endwith %}
+                                        <!-- 비추천 -->
+                                        {% with comment_hate_users=comment.hate_users.all %}
+                                            {% if request.user in comment_hate_users %}
+                                                <a href="{% url 'restaurant:hateComment' restaurant.id comment.id %}">
+                                                <i class="fas fa-thumbs-down" style="color: blue;"></i>
+                                                </a>
+                                            {% elif user.is_authenticated %}
+                                                <a href="{% url 'restaurant:hateComment' restaurant.id comment.id %}">
+                                                <i class="far fa-thumbs-down" style="color: gray;"></i>
+                                                </a>
+                                            {% else %}
+                                                <i class="far fa-thumbs-down" style="color: gray;"></i>
+                                            {% endif %}
+                                            {{ comment.hate_users.count }}
+                                        {% endwith %}
                                     </td>
-                                    <td style="width: 30%;">
+                                </tr>
+                                <tr style="border-bottom: 1px solid #dee2e6;">
+                                    <td style="width: 70%; padding:15px;">
+                                        [{{ comment.menu.name }}] {{ comment.content }}
+                                    </td>
+                                    <td style="width: 30%; padding:15px;" align="right">
                                         {% if comment.thumbnail %}
-                                            <img src="{{ comment.thumbnail.url }}" style="max-width: 50%;">
+                                            <img src="{{ comment.thumbnail.url }}" style="max-width: 100%; border-radius: 5px;">
                                         {% else %}
-                                            <img src="{% static 'img/gallery/no image.jpg' %}" style="max-width: 50%;">
+                                            <img src="{% static 'img/gallery/no image.jpg' %}" style="max-width: 100%; border-radius: 5px;">
                                         {% endif %}
                                     </td>
                                 </tr>

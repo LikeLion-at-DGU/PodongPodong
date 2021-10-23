@@ -39,7 +39,6 @@ class FoodMenu(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
     price = models.CharField(max_length=20)
-    thumbnail = models.ImageField(upload_to='images/', blank=True)
 
     def __str__(self):
         return self.name
