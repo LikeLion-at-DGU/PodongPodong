@@ -15,7 +15,7 @@ class RestaurantListView(ListView):
     context_object_name = 'restaurant_list'
     # 템플릿 파일 위치 지정
     template_name = 'restaurant/category.html'
-    paginate_by = 1
+    paginate_by = 10
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -25,7 +25,7 @@ class RestaurantListView(ListView):
         restaurant = Restaurant.objects.all()
 
         page = self.request.GET.get('page', '1')
-        paginator = Paginator(restaurant, '1')
+        paginator = Paginator(restaurant, '10')
         restaurant = paginator.page(page)
 
         context['restaurant_list'] = restaurant
@@ -41,7 +41,7 @@ def RestaurantList(request, id):
         restaurant = Restaurant.objects.filter(category=current_category)
 
     page = request.GET.get('page', '1')
-    paginator = Paginator(restaurant, '1')
+    paginator = Paginator(restaurant, '10')
     restaurant = paginator.page(page)
 
     context = {'category': category, 'restaurant_list': restaurant}
