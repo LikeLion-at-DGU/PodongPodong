@@ -11,7 +11,7 @@ body::before{
     content: "";
     position: absolute; z-index: 1;
     top: 0; right: 0; bottom:0; left:0;
-    background: #222222;
+    background: #fff;
 }
 .signup-form{
     position: relative; z-index: 2;
@@ -22,7 +22,7 @@ body::before{
     text-align: center;
 }
 .signup-form h1 a{
-    color: #fff;
+    color: #ff9933;
     text-decoration: none;
 }
 .int-area{
@@ -37,7 +37,7 @@ body::before{
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #999;
-    font-size: 18px; color: #fff;
+    font-size: 18px; color: #000;
     outline: none;
 }
 .sel-area{
@@ -67,20 +67,20 @@ body::before{
 }
 .int-area label{
     position: absolute; left: 10px; top: 15px;
-    font-size: 18px; color:#fff;
+    font-size: 18px; color:#000;
     transition: top .5s ease;
 }
 .int-area input:focus + label,
 .int-area input:valid + label {
     top: -2px;
-    font-size: 13px; color: #97df11;
+    font-size: 13px; color: #ff9933;
 }
 .btn-area {
     margin-top: 30px;
 }
 .btn-area input {
     width: 100%; height: 50px;
-    background-color: #97df11;
+    background-color: #ff9933;
     color:#fff;
     font-size: 20px;
     border:none;
@@ -88,16 +88,16 @@ body::before{
 }
 .caption{
     text-align: center;
-    color:#fff;
+    color:#000;
 }
 .caption a {
     text-decoration: none;
 }
 a:link{
-    color:#97df11;
+    color:#ff9933;
 }
 a:visited{
-    color:#97df11;
+    color:#ff9933;
 }
 a:hover{
     text-decoration: underline;

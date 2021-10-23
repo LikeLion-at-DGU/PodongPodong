@@ -46,15 +46,37 @@
                         value="{{ search_key }}"
                       />
                     </div>
-                    <div class="d-grid gap-3 col-lg-2">
+                    <div class="col-lg-2">
                       <button class="btn btn-danger" type="submit">
-                        검색하기
+                        검색
                       </button>
                     </div>
                   </form>
-                <table class="table" style="margin-top: 0;">
+                  <!--모바일에 노출되는 테이블-->
+                  <table class="table table-striped d-block d-sm-none">
                     <thead>
-                        <tr class="thead">
+                        <tr class="thead col-xs-1">
+                            <th width=15%>식당</th>
+                            <th width=20%>메뉴</th>
+                            <th width=25%>내용</th>
+                            <th width=14%>좋아요</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for review in reviews %}
+                        <tr onclick="location.href='{% url 'restaurant:restaurant_detail' review.restaurant.id %}'">
+                            <td>{{review.restaurant.name}}</td>
+                            <td>{{review.menu}}</td>
+                            <td>{{review.content}}</td>
+                            <td>{{review.like_users.count}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                  <!--모바일 이외의 기기에서 노출되는 화면-->
+                  <table class="table table-striped d-none d-sm-block">
+                    <thead>
+                        <tr class="thead col-xs-1">
                             <th width=10%>순번</th>
                             <th width=15%>식당</th>
                             <th width=15%>메뉴</th>
@@ -64,24 +86,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% if reviews %}
-                        {% for review in reviews %}
-                            <tr onclick="location.href='{% url 'restaurant:restaurant_detail' review.restaurant.id %}'">
-                                <td>{{ forloop.revcounter }}</td>
-                                <td>{{review.restaurant.name}}</td>
-                                <td>{{review.menu}}</td>
-                                <td>{{review.content}}</td>
-                                <td>{{review.user}}</td>
-                                <td>{{review.like_users.count}}</td>
-                            </tr>
-                        {% endfor %}
-                    {% else %}
-                        <tr>
-                            <td colspan="6" rowspan="3" style="text-align: center;">검색 후기가 없습니다.</td>
+                    {% for review in reviews %}
+                        <tr onclick="location.href='{% url 'restaurant:restaurant_detail' review.restaurant.id %}'">
+                            <td>{{ forloop.revcounter }}</td>
+                            <td>{{review.restaurant.name}}</td>
+                            <td>{{review.menu}}</td>
+                            <td>{{review.content}}</td>
+                            <td>{{review.user}}</td>
+                            <td>{{review.like_users.count}}</td>
                         </tr>
-                    {% endif %}
+                    {% endfor %}
                     </tbody>
-                </table>
+                  </table>
             </div>
         </div>
     </div>
