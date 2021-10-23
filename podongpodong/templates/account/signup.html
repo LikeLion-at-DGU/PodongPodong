@@ -1,10 +1,11 @@
 {% load static %}
 <head>
-    <link rel="stylesheet" href="{% static 'css/signup.css' %}?a">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}?ab">
 </head>
 <body>
 <section class="signup-form">
     <div class="box">
+    <h1><a href="{% url 'main' %}">포동포동</a></h1>
     <div class = "caption">이미 계정이 있으신가요? 바로 <a href="{% url 'account_login' %}">로그인</a> 하세요.</div>
     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
     {% csrf_token %} 
