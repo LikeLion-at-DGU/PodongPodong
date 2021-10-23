@@ -5,7 +5,7 @@
 <section id="testimonial">
     <div class="container">
         <div class="row h-100">
-            <div class="col-lg-7 mx-auto text-center mb-6">
+            <div class="col-lg-7 mx-auto text-center mb-3">
                 <div class="responsive">
                     <a href="{% url 'restaurant:restaurant_list' %}" style="border:1px solid #ced4da; border-radius: 4px; margin: 5px;">
                         전체
@@ -18,39 +18,42 @@
                 </div>
             </div>
         </div>
-        <form action="{% url 'restaurant:search_resturant' %}" method="GET" class="row gx-2 gy-2 align-items-center">
-            <div class="col-lg-3 input-group-icon pe-2">
-                <i class="fas fa-search input-box-icon text-primary"></i>
-                <input
-                    class="col-lg-3 form-control border-0 input-box bg-100"
-                    type="search"
-                    placeholder="Search Restaurant"
-                    aria-label="Search"
-                    name="search_key"
-                    id="search_key"
-                    value="{{ search_key }}"
-                />
-            </div>
-            <div class="d-grid gap-3 col-lg-2">
-                <button class="btn btn-danger" type="submit">
-                검색하기
-                </button>
-            </div>
+        <form action="{% url 'restaurant:search_resturant' %}" method="GET" class="row gx-2 gy-2 align-items-center mb-3">
+            <table width="90%" align="center">
+                <tr>
+                    <td width="70%;">
+                        <i class="fas fa-search input-box-icon text-primary"></i>
+                        <input
+                            class="col-lg-3 form-control border-0 input-box bg-100"
+                            style="display: inline; width:80%;"
+                            type="search"
+                            placeholder="Search Restaurant"
+                            aria-label="Search"
+                            name="search_key"
+                            id="search_key"
+                            value="{{ search_key }}"
+                        />
+                    </td>
+                    <td width="20%;">
+                        <button class="btn btn-danger" type="submit" style="padding: 0.5rem;">
+                            검색
+                        </button>
+                    </td>
+                </tr>
+            </table>
         </form>
         <!-- 식당 리스트 -->
-        <table>
+        <table width="90%" align="center">
         {% for restaurant in restaurant_list %}
-            <tr style="border: 1px solid #dee2e6;">
-                <td style="width: 30%;">
+            <tr style="border-bottom: 1px solid #dee2e6;">
+                <td style="width: 30%; padding: 10px;">
                     <a href="{{ restaurant.get_absolute_url }}" >
-                        <img src="{{ restaurant.thumbnail.url }}" style="max-width: 80%;">
+                        <img src="{{ restaurant.thumbnail.url }}" style="max-width: 80%; border-radius: 5px;">
                     </a>
                 </td>
-                <td style="width: 70%;">
+                <td style="width: 70%; padding: 15px;">
                     <a href="{{ restaurant.get_absolute_url }}" >
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">{{ restaurant.name }}</h5>
-                        </div>
+                        <h5>{{ restaurant.name }}</h5>
                         <p class="mb-1">
                             <span class="text-primary fs--1 me-1">
                                 <i class="fas fa-location-arrow"></i>

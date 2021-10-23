@@ -6,46 +6,56 @@
 {% if restaurant_list %}
 <section id="testimonial">
   <div class="container">
-    <p>"{{ search_key }}"의 검색 결과입니다.</p>
-      <!-- 식당 리스트 -->
-      <div class="row gx-2">
-          {% for restaurant in restaurant_list %}
-              <div class="col-sm-6 col-md-3 col-lg-3 h-100 mb-5">
-                  <a href="{{ restaurant.get_absolute_url }}" >
-                      <div class="card card-span h-100 text-white rounded-3">
-                          <img class="img-fluid rounded-3 h-100" src="{% static 'img/gallery/food-world.png' %}"/>
-                          <div class="card-body ps-0">
-                              <div class="d-flex align-items-center mb-3">
-                                  <div class="flex-1 ms-3">
-                                      <h5 class="mb-0 fw-bold text-1000">{{ restaurant.name }}</h5>
-                                      <span class="text-primary fs--1 me-1">
-                                          <i class="fas fa-location-arrow"></i>
-                                      </span>
-                                      <span class="mb-0 text-primary">{{ restaurant.location }}</span>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </a>
-              </div>
-          {% endfor %}
 
-          <div class="list-group">
-              {% for restaurant in restaurant_list %}
-                  <a href="{{ restaurant.get_absolute_url }}" class="list-group-item list-group-item-action">
-                      <div class="d-flex w-100 justify-content-between">
-                          <h5 class="mb-1">{{ restaurant.name }}</h5>
-                      </div>
-                      <p class="mb-1">
-                          <span class="text-primary fs--1 me-1">
-                              <i class="fas fa-location-arrow"></i>
-                          </span>
-                          {{ restaurant.location }}
-                      </p>
-                  </a>
-              {% endfor %}
-          </div>
-      </div>
+        <form action="{% url 'restaurant:search_resturant' %}" method="GET" class="row gx-2 gy-2 align-items-center mb-3">
+            <table width="90%" align="center">
+                <tr>
+                    <td width="70%;">
+                        <i class="fas fa-search input-box-icon text-primary"></i>
+                        <input
+                            class="col-lg-3 form-control border-0 input-box bg-100"
+                            style="display: inline; width:80%;"
+                            type="search"
+                            placeholder="Search Restaurant"
+                            aria-label="Search"
+                            name="search_key"
+                            id="search_key"
+                            value="{{ search_key }}"
+                        />
+                    </td>
+                    <td width="20%;">
+                        <button class="btn btn-danger" type="submit" style="padding: 0.5rem;">
+                            검색
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <!-- 식당 리스트 -->
+        <table width="90%" align="center">
+        {% for restaurant in restaurant_list %}
+            <tr style="border-bottom: 1px solid #dee2e6;">
+                <td style="width: 30%; padding: 10px;">
+                    <a href="{{ restaurant.get_absolute_url }}" >
+                        <img src="{{ restaurant.thumbnail.url }}" style="max-width: 80%; border-radius: 5px;">
+                    </a>
+                </td>
+                <td style="width: 70%; padding: 15px;">
+                    <a href="{{ restaurant.get_absolute_url }}" >
+                        <h5>{{ restaurant.name }}</h5>
+                        <p class="mb-1">
+                            <span class="text-primary fs--1 me-1">
+                                <i class="fas fa-location-arrow"></i>
+                            </span>
+                            {{ restaurant.location }}
+                        </p>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+
   </div>
 </section>
 {% else %}
