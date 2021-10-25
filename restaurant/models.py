@@ -20,7 +20,7 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=30)
     location = models.CharField(max_length=100, blank=True)
     phone_number = models.CharField(max_length=15, blank=True)
-    business_hour = models.CharField(max_length=30, blank=True)
+    business_hour = models.CharField(max_length=150, blank=True)
     thumbnail = models.ImageField(upload_to='images/', blank=True)
     follow_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name="follow_restaurants")
 
