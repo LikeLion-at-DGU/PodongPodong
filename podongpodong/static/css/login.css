@@ -30,6 +30,9 @@ body::before{
     position: relative;
     margin-top: 20px;
 }
+.box {
+    zoom: 2;
+}
 
 .int-area:first-child {margin-top: 0;}
 .int-area input{
