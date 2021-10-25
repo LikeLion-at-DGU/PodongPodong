@@ -1,28 +1,47 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/components/restaurant_search.css'%}">
+<link rel="stylesheet" href="{% static 'css/board.css'%}?ab">
 
 <section class="py-0 bg-primary-gradient">
     <div class = 'container'>
         <div class="row justify-content-center g-0">
             <div class="col-xl-9">
                 <div class="col-lg-6 text-center mx-auto mb-3 mb-md-5 mt-4">
-                    <h5 class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6" style="margin-top:10rem !important;">식당 건의함</h5>
+                    <h5 class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6" style="margin-top:8rem !important;">식당 건의함</h5>
                 </div>
                 <div class = "board_main">
-                    <a href = "{% url 'board:request_new' %}"><button class = 'board_write'>글쓰기</button></a>
-                    <table class = 'board_table'>
+                    <a href = "{% url 'board:request_new' %}"><button class="btn btn-danger" style="padding:0.5rem;" type="submit">
+                        글쓰기
+                      </button></a>
+                    <table class="table table-striped d-block d-sm-none">
                         <thead>
+                            <tr class="thead col-xs-1">
+                                <th scope="col" id = 'board_title'>제목</th>
+                                <th scope='col' id = 'board_cafeteria' width=30%>식당 이름</th>
+                                <th scope="col" id = 'board_writer'>작성자</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for board in boards %}
                             <tr>
-                                <th scope="col" id = 'board_num'>No.</th>
+                                <td><a id = 'board_title_a' href="{% url 'board:request_detail' board.id %}">{{board.title}}</a></td>
+                                <td>{{board.cafeteria}}</td>
+                                <td>{{board.writer}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                      </table>
+                      <!--모바일 이외의 화면에서만 보임-->
+                      <table class="table d-none d-sm-table">
+                        <thead>
+                            <tr class="thead col-xs-1">
+                                <th scope="col" id = 'board_num'>순번</th>
                                 <th scope="col" id = 'board_title'>제목</th>
                                 <th scope='col' id = 'board_cafeteria'>식당 이름</th>
                                 <th scope="col" id = 'board_writer'>작성자</th>
                                 <th scope="col" id = 'board_date'>작성날짜</th>
-                            </tr>
                         </thead>
-
                         <tbody>
                             {% for board in boards %}
                             <tr>
@@ -34,7 +53,7 @@
                             </tr>
                             {% endfor %}
                         </tbody>
-                    </table>
+                      </table>
                 </div>
             </div>
         
@@ -62,5 +81,46 @@ $(".hover").mouseleave(
   }
 );
 </script>
+<style>
+    th, td {
+        text-align: left;
+    }
+    .thead {
+      border-bottom:#F17228;
+    }
+    .bnt {
+      background-color: #F17228; 
+      color: white; 
+      font-weight: bold; 
+      border: none; 
+      border-radius: 5px; width: 80px;
+    }
+    section {
+  margin-top: 100px;
+  min-height: 400px;
+}
+.middle{
+  text-align: center;
+  margin-bottom: 5%;
+}
+.middle a {
+  margin: 20px;
+  padding: 10px;
+}
+.number {
+  font-size: 20px;
+}
+.active {
+  transition-duration: 0.2s;
+}
+.active:hover {
+  color: #FFB310;
+  cursor: pointer;
+}
+.nonactive {
+  color: #a4a4a4;
+  cursor: pointer;
+}
+  </style>
 
 {% endblock %}

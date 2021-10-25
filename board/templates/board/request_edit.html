@@ -3,22 +3,25 @@
 {% block content %}
 
 <section>
-    <div class='board_content'>
-        <h2>글 수정하기</h2><br><br>
-    </div>
+<div class='board_content text-center' style="margin-top: 100px;">
+    <i class="far fa-edit" style="color: #F17228; font-size: 30px;"></i>
+    <div class="fw-bold text-center text-danger fs-3 fs-lg-5 lh-sm my-3" style="display:inline-block;">글 수정하기</div>
+    </div><br>
 
 <div class = 'container'>
-    <div class = 'board_edit'>
-        <form action="{%url 'board:request_update' board.id %}" method="POST" enctype="multipart/form-data">
+    <div class = 'board_new'>
+        <form action = "{%url 'board:request_update' board.id %}" method="POST" enctype="multipart/form-data">
             {%csrf_token%}
             <p>제목</p>
-            <input type="text" name="title" value="{{board.title}}">
+            <input type="text" name="title" value="{{board.title}}" style="width:100%">
             <p>식당 이름</p>
-            <input type="text" name="cafeteria" value="{{board.cafeteria}}">
+            <input type="text" name="cafeteria" value="{{board.cafeteria}}" style="width:100%">
             <p>비고</p>
-            <textarea type="text" name="body" id="" cols="30" rows="10">{{board.body}}</textarea>
+            <textarea name="body" cols="50" rows="10" style="width: 100%;">{{board.body}}</textarea>
             <br><br>
-            <button type="submit" style = 'font-size:20px; width:6%;'>제출</button>
+            <div style="text-align: center;">
+                <button type='submit' style = 'font-size:18px; width:20%; color: white;'>제출</button>
+            </div>
         </form>
     </div>
 </div>

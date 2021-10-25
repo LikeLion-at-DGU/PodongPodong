@@ -1,7 +1,6 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 <link rel="stylesheet" href="{% static 'css/components/review.css' %}" />
-
-<section class="py-0 bg-primary-gradient" style="margin-top: 0px;">
+<section class="py-0 bg-primary-gradient">
     <div class="container">
       <div class="row justify-content-center g-0">
         <div class="col-xl-9">
@@ -42,7 +41,7 @@
               />
             </div>
             <div class="col-lg-2">
-              <button class="btn btn-danger" type="submit">
+              <button class="btn btn-danger" style="padding:0.5rem;" type="submit">
                 검색
               </button>
             </div>
@@ -69,7 +68,7 @@
             </tbody>
           </table>
           <!--모바일 이외의 화면에서만 보임-->
-          <table class="table d-none d-sm-table">
+          <table class="table table-striped d-none d-sm-table">
             <thead>
                 <tr class="thead col-xs-1">
                     <th width=10%>순번</th>

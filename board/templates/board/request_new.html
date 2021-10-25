@@ -2,8 +2,10 @@
 {% load static %}
 {% block content %}
 <section>
-    <div class='board_content' style="margin-top: 100px;">
-        <h2>글 작성하기</h2><br>
+    <div class='board_content text-center' style="margin-top: 100px;">
+        <i class="far fa-edit" style="color: #F17228; font-size: 30px;"></i>
+        <div class="fw-bold text-center text-danger fs-3 fs-lg-5 lh-sm my-3" style="display:inline-block;">글 작성하기</div>
+        </div><br>
     {% if user.is_authenticated %}
 
     <div class = 'container'>
@@ -17,7 +19,9 @@
                 <p id = "new"><strong>비고</strong></p>
                 <textarea name="body" cols="50" rows="10" style="width: 100%;"></textarea>
                 <br><br>
-                <button type='submit' style = 'font-size:18px; width:100%; color: white;'>제출</button>
+                <div style="text-align: center;">
+                <button type='submit' style = 'font-size:18px; width:20%; color: white;'>제출</button>
+                </div>
             </form>
         </div>
     </div>
