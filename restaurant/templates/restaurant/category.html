@@ -47,9 +47,13 @@
         {% for restaurant in restaurant_list %}
             <tr style="border-bottom: 1px solid #dee2e6;">
                 <td style="width: 30%; padding: 10px;">
+                    {% if restaurant.thumbnail %}
                     <a href="{{ restaurant.get_absolute_url }}" >
                         <img src="{{ restaurant.thumbnail.url }}" style="max-width: 80%; border-radius: 5px;">
                     </a>
+                    {% else %}
+                        <img src="{% static 'img/gallery/logo.svg' %}" style="max-width: 150%; border-radius: 5px;">
+                    {% endif %}
                 </td>
                 <td style="width: 70%; padding: 15px;">
                     <a href="{{ restaurant.get_absolute_url }}" >
