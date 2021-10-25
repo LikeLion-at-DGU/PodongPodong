@@ -12,4 +12,5 @@ def main(request):
     for i in range(6):
       id_arr.append(review[i].id)
     review = review.filter(id__in=id_arr)
-  return render(request, 'mainPage.html',{'review':review})
+  category = Category.objects.all()
+  return render(request, 'mainPage.html',{'review':review, 'category':category})

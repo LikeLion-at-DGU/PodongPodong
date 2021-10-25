@@ -336,12 +336,25 @@
   <section class="py-8 overflow-hidden">
     <div class="container">
       <div class="row flex-center mb-6">
-        <div class="col-lg-12">
+        <!--모바일 화면에서만 보임-->
+        <div class="col-12 d-block d-sm-none">
+          <h5 class="fw-bold fs-3 fs-lg-5 lh-sm text-center">
+            Category
+          </h5>
+        </div>
+        <div class="col-12 text-end d-block d-sm-none">
+          <a class="btn btn-lg text-800 me-2" href="{% url 'restaurant:restaurant_list' %}" role="button">
+            전체보기
+            <i class="fas fa-chevron-right ms-2"></i>
+          </a>
+        </div>
+        <!--모바일 이외의 화면에서만 보임-->
+        <div class="col-lg-12 d-none d-sm-block">
           <h5 class="fw-bold fs-3 fs-lg-5 lh-sm text-center text-lg-center">
             Category
           </h5>
         </div>
-        <div class="col-lg-12 text-lg-end text-lg-end">
+        <div class="col-lg-12 text-lg-end text-lg-end d-none d-sm-block">
           <a class="btn btn-lg text-800 me-2" href="{% url 'restaurant:restaurant_list' %}" role="button">
             전체보기
             <i class="fas fa-chevron-right ms-2"></i>
@@ -387,102 +400,26 @@
             <div class="carousel-inner">
               <div class="carousel-item active" data-bs-interval="10000">
                 <div class="row h-100 align-items-center">
+                  {% for category in category %}
                   <div class="col-4 col-md-4 col-xl mb-5 h-100">
                     <div class="card card-span h-100 rounded-circle">
+                      <a href="{% url 'restaurant:restaurant_list2' category.id %}">
                       <img
                         class="img-fluid rounded-circle h-100"
-                        src="{% static 'img/gallery/search-pizza.png' %}"
+                        src="{{category.thumbnail.url}}"
                         alt="..."
                       />
+                      </a>
                       <div class="card-body ps-0">
                         <h5
                           class="text-center fw-bold text-1000 text-truncate mb-2"
                         >
-                          양식
+                          {{category.name}}
                         </h5>
                       </div>
                     </div>
                   </div>
-                  <div class="col-4 col-md-4 col-xl mb-5 h-100">
-                    <div class="card card-span h-100 rounded-circle">
-                      <img
-                        class="img-fluid rounded-circle h-100"
-                        src="{% static 'img/gallery/burger.png' %}"
-                        alt="..."
-                      />
-                      <div class="card-body ps-0">
-                        <h5
-                          class="text-center fw-bold text-1000 text-truncate mb-2"
-                        >
-                          중식
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4 col-md-4 col-xl mb-5 h-100">
-                    <div class="card card-span h-100 rounded-circle">
-                      <img
-                        class="img-fluid rounded-circle h-100"
-                        src="{% static 'img/gallery/noodles.png' %}"
-                        alt="..."
-                      />
-                      <div class="card-body ps-0">
-                        <h5
-                          class="text-center fw-bold text-1000 text-truncate mb-2"
-                        >
-                          한식
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4 col-md-4 col-xl mb-5 h-100">
-                    <div class="card card-span h-100 rounded-circle">
-                      <img
-                        class="img-fluid rounded-circle h-100"
-                        src="{% static 'img/gallery/sub-sandwich.png' %}"
-                        alt="..."
-                      />
-                      <div class="card-body ps-0">
-                        <h5
-                          class="text-center fw-bold text-1000 text-truncate mb-2"
-                        >
-                          일식
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4 col-md-4 col-xl mb-5 h-100">
-                    <div class="card card-span h-100 rounded-circle">
-                      <img
-                        class="img-fluid rounded-circle h-100"
-                        src="{% static 'img/gallery/chowmein.png' %}"
-                        alt="..."
-                      />
-                      <div class="card-body ps-0">
-                        <h5
-                          class="text-center fw-bold text-1000 text-truncate mb-2"
-                        >
-                          카페
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4 col-md-4 col-xl mb-5 h-100">
-                    <div class="card card-span h-100 rounded-circle">
-                      <img
-                        class="img-fluid rounded-circle h-100"
-                        src="{% static 'img/gallery/steak.png' %}"
-                        alt="..."
-                      />
-                      <div class="card-body ps-0">
-                        <h5
-                          class="text-center fw-bold text-1000 text-truncate mb-2"
-                        >
-                          술집
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
+                  {% endfor %}
                 </div>
               </div>
             </div>
@@ -501,102 +438,28 @@
             <div class="carousel-inner">
               <div class="carousel-item active" data-bs-interval="10000">
                 <div class="row h-100 align-items-center">
+                  {% for category in category %}
                   <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
                     <div class="card card-span h-100 rounded-circle">
+                      <a href="{% url 'restaurant:restaurant_list2' category.id %}">
                       <img
                         class="img-fluid rounded-circle h-100"
-                        src="{% static 'img/gallery/search-pizza.png' %}"
+                        src="{{ category.thumbnail.url }}"
                         alt="..."
+                        width="218px"
+                        height="218px"
                       />
+                      </a>
                       <div class="card-body ps-0">
                         <h5
                           class="text-center fw-bold text-1000 text-truncate mb-2"
-                        >
-                          양식
+                         style="width: 218px;">
+                          {{category.name}}
                         </h5>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                    <div class="card card-span h-100 rounded-circle">
-                      <img
-                        class="img-fluid rounded-circle h-100"
-                        src="{% static 'img/gallery/burger.png' %}"
-                        alt="..."
-                      />
-                      <div class="card-body ps-0">
-                        <h5
-                          class="text-center fw-bold text-1000 text-truncate mb-2"
-                        >
-                          중식
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                    <div class="card card-span h-100 rounded-circle">
-                      <img
-                        class="img-fluid rounded-circle h-100"
-                        src="{% static 'img/gallery/noodles.png' %}"
-                        alt="..."
-                      />
-                      <div class="card-body ps-0">
-                        <h5
-                          class="text-center fw-bold text-1000 text-truncate mb-2"
-                        >
-                          한식
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                    <div class="card card-span h-100 rounded-circle">
-                      <img
-                        class="img-fluid rounded-circle h-100"
-                        src="{% static 'img/gallery/sub-sandwich.png' %}"
-                        alt="..."
-                      />
-                      <div class="card-body ps-0">
-                        <h5
-                          class="text-center fw-bold text-1000 text-truncate mb-2"
-                        >
-                          일식
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                    <div class="card card-span h-100 rounded-circle">
-                      <img
-                        class="img-fluid rounded-circle h-100"
-                        src="{% static 'img/gallery/chowmein.png' %}"
-                        alt="..."
-                      />
-                      <div class="card-body ps-0">
-                        <h5
-                          class="text-center fw-bold text-1000 text-truncate mb-2"
-                        >
-                          카페
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                    <div class="card card-span h-100 rounded-circle">
-                      <img
-                        class="img-fluid rounded-circle h-100"
-                        src="{% static 'img/gallery/steak.png' %}"
-                        alt="..."
-                      />
-                      <div class="card-body ps-0">
-                        <h5
-                          class="text-center fw-bold text-1000 text-truncate mb-2"
-                        >
-                          술집
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
+                  {% endfor %}
                 </div>
               </div>
               <!--
@@ -928,13 +791,21 @@
                     {% for review in review %}
                     <div class="col-4 col-md-4 mb-5 h-100">
                       <div class="card card-span h-100 rounded-3">
-                        <img
-                          class="img-fluid rounded-3 h-100"
-                          src="{% static 'img/gallery/food-world.png' %}"
-                          alt="..."
-                          width="350"
-                          height="223"
-                        >
+                        {% if review.thumbnail %}
+                      <img
+                        class="img-fluid rounded-3 h-100"
+                        src="{{ review.thumbnail.url }}"
+                        alt="..."
+                        width="350"
+                        height="223"
+                      >
+                      {% else %}
+                      <img
+                      class="img-fluid rounded-3 h-100" 
+                      src="{% static 'img/gallery/logo_black.png' %}"
+                      width="350"
+                      height="223">
+                      {%endif%}
   
                         <div class="card-body ps-0">
                           <h5 class="fw-bold text-1000 text-truncate mb-1">
@@ -986,13 +857,21 @@
                   {% for review in review %}
                   <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
                     <div class="card card-span h-100 rounded-3">
+                      {% if review.thumbnail %}
                       <img
                         class="img-fluid rounded-3 h-100"
-                        src="{% static 'img/gallery/food-world.png' %}"
+                        src="{{ review.thumbnail.url }}"
                         alt="..."
                         width="350"
                         height="223"
                       >
+                      {% else %}
+                      <img
+                      class="img-fluid rounded-3 h-100" 
+                      src="{% static 'img/gallery/logo_black.png' %}"
+                      width="350"
+                      height="223">
+                      {%endif%}
 
                       <div class="card-body ps-0">
                         <h5 class="fw-bold text-1000 text-truncate mb-1">
