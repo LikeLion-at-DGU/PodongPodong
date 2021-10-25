@@ -35,25 +35,30 @@
                                             {% endwith %}
                                         </span>
                                     </p>
+                                    {% if restaurant.location %}
                                     <p style="margin-bottom: 0.5em;">
                                         <span class="text-primary fs--1 me-1">
                                             <i class="fas fa-location-arrow"></i>
                                         </span>
                                         {{ restaurant.location }}
                                     </p>
+                                    {% endif %}
+                                    {% if restaurant.phone_number %}
                                     <p style="margin-bottom: 0.5em;">
                                         <span class="text-primary fs--1 me-1">
                                             <i class="fas fa-phone-alt"></i>
                                         </span>
                                         {{ restaurant.phone_number }}
                                     </p>
+                                    {% endif %}
+                                    {% if restaurant.business_hour %}
                                     <p style="margin-bottom: 0;">
                                         <span class="text-primary fs--1 me-1">
                                             <i class="fas fa-clock"></i>
                                         </span>
-                                        {{ restaurant.business_open_hour }}
-                                        ~ {{ restaurant.business_close_hour }}
+                                        {{ restaurant.business_hour }}
                                     </p>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
