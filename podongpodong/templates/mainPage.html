@@ -404,11 +404,44 @@
                   <div class="col-4 col-md-4 col-xl mb-5 h-100">
                     <div class="card card-span h-100 rounded-circle">
                       <a href="{% url 'restaurant:restaurant_list2' category.id %}">
+                      {% if category.name == "양식" %}
                       <img
                         class="img-fluid rounded-circle h-100"
-                        src="{{category.thumbnail.url}}"
+                        src="{% static 'img/gallery/steak.png' %}"
                         alt="..."
                       />
+                      {% elif category.name == "한식" %}
+                      <img
+                        class="img-fluid rounded-circle h-100"
+                        src="{% static 'img/gallery/hansik.png' %}"
+                        alt="..."
+                      />
+                      {% elif category.name == "중식" %}
+                      <img
+                        class="img-fluid rounded-circle h-100"
+                        src="{% static 'img/gallery/jjajang.jpg' %}"
+                        alt="..."
+                      />
+                      {% elif category.name == "일식" %}
+                      <img
+                        class="img-fluid rounded-circle h-100"
+                        src="{% static 'img/gallery/sushi.jpg' %}"
+                        alt="..."
+                      />
+                      {% elif category.name == "카페" %}
+                      <img
+                        class="img-fluid rounded-circle h-100"
+                        src="{% static 'img/gallery/caffe.jpg' %}"
+                        alt="..."
+                      />
+                      {% elif category.name == "술집" %}
+                      <img
+                        class="img-fluid rounded-circle h-100"
+                        src="{% static 'img/gallery/alchole.jpg' %}"
+                        alt="..."
+                      />
+                      {% else %}
+                      {% endif %}
                       </a>
                       <div class="card-body ps-0">
                         <h5
@@ -442,13 +475,56 @@
                   <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
                     <div class="card card-span h-100 rounded-circle">
                       <a href="{% url 'restaurant:restaurant_list2' category.id %}">
-                      <img
-                        class="img-fluid rounded-circle h-100"
-                        src="{{ category.thumbnail.url }}"
-                        alt="..."
-                        width="218px"
-                        height="218px"
-                      />
+                        {% if category.name == "양식" %}
+                        <img
+                          class="img-fluid rounded-circle h-100"
+                          src="{% static 'img/gallery/steak.png' %}"
+                          alt="..."
+                          width="218px"
+                          height="218px"
+                        />
+                        {% elif category.name == "한식" %}
+                        <img
+                          class="img-fluid rounded-circle h-100"
+                          src="{% static 'img/gallery/hansik.png' %}"
+                          alt="..."
+                          width="218px"
+                          height="218px"
+                        />
+                        {% elif category.name == "중식" %}
+                        <img
+                          class="img-fluid rounded-circle h-100"
+                          src="{% static 'img/gallery/jjajang.jpg' %}"
+                          alt="..."
+                          width="218px"
+                          height="218px"
+                        />
+                        {% elif category.name == "일식" %}
+                        <img
+                          class="img-fluid rounded-circle h-100"
+                          src="{% static 'img/gallery/sushi.jpg' %}"
+                          alt="..."
+                          width="218px"
+                          height="218px"
+                        />
+                        {% elif category.name == "카페" %}
+                        <img
+                          class="img-fluid rounded-circle h-100"
+                          src="{% static 'img/gallery/caffe.jpg' %}"
+                          alt="..."
+                          width="218px"
+                          height="218px"
+                        />
+                        {% elif category.name == "술집" %}
+                        <img
+                          class="img-fluid rounded-circle h-100"
+                          src="{% static 'img/gallery/alchole.jpg' %}"
+                          alt="..."
+                          width="218px"
+                          height="218px"
+                        />
+                        {% else %}
+                        {% endif %}
                       </a>
                       <div class="card-body ps-0">
                         <h5
