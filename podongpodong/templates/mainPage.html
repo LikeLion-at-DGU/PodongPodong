@@ -991,15 +991,15 @@
                         class="img-fluid rounded-3 h-100"
                         src="..{{ review.thumbnail.url }}"
                         alt="..."
-                        width="350"
-                        height="223"
+                        width="228px"
+                        height="228px"
                       >
                       {% else %}
                       <img
                       class="img-fluid rounded-3 h-100" 
                       src="{% static 'img/gallery/logo_black.png' %}"
-                      width="350"
-                      height="223">
+                      width="228px"
+                      height="228px">
                       {%endif%}
 
                       <div class="card-body ps-0">
@@ -1013,7 +1013,7 @@
                           <span class="text-primary">{{review.restaurant.name}}</span>
                         </div>
                         <span class="text-1000 fw-bold">{{review.menu.price}}</span><br>
-                        <span class="text-1000 fw-bold">종아요:{{review.like_users.count}}개</span>
+                        <span class="text-1000 fw-bold">좋아요:{{review.like_users.count}}개</span>
                       </div>
                     </div>
                     <div class="d-grid gap-2">
