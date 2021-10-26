@@ -13,7 +13,7 @@
         class="d-inline-block"
         src="{% static 'img/podongpodong_logo.png' %}"
         alt="logo"
-        style="width: 140px; height: 90px; margin: 0; padding: 0; object-fit: cover; "
+        style="width: 130px; height: 80px; margin-left: -25px; padding: 0; object-fit: cover; "
       />
       <!-- <span class="text-1000 fs-3 fw-bold ms-2 text-gradient">
         포동포동
@@ -30,6 +30,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+    <!-- 메뉴 -->
     <div
       class="collapse navbar-collapse border-top border-lg-0 my-2 mt-lg-0"
       id="navbarSupportedContent"
@@ -55,15 +56,14 @@
           <a href="{% url 'board:board_main' %}">건의 목록</a>
         </div>
       </div>
-      <form class="d-flex mt-4 mt-lg-0 ms-lg-auto ms-xl-0">
         {% if user.is_authenticated %}
           <div class="dropdown nav-link mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">
             <p class="dropbtn nav_item mb-0 fw-bold text-lg-center mt-3">
                 MY Page
             </p>
             <div class="dropdown-content">
-              <a class="dropdown-item" href="{% url 'users:mypage' request.user.id %}">Mypage</a></li>
-              <a class="dropdown-item" href="{% url 'account_logout' %}">Logout </a></li>
+              <a href="{% url 'users:mypage' request.user.id %}">Mypage</a></li>
+              <a href="{% url 'account_logout' %}">Logout </a></li>
             </div>
           </div> 
         {% else %}
@@ -72,14 +72,11 @@
                 Login 
             </p>
             <div class="dropdown-content">
-              <a class="dropdown-item" href="{%url 'account_login'%}">Login</a></li>
-              <a class="dropdown-item" href="{%url 'account_signup'%}">Signup</a></li>
+              <a href="{%url 'account_login'%}">Login</a></li>
+              <a href="{%url 'account_signup'%}">Signup</a></li>
             </div>
           </div>   
           {% endif %}
-        </div>
-      </div> 
-      </form>
-    </div>
-  </div>
+      </div>
+  </div> 
 </nav>
