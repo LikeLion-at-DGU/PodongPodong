@@ -6,7 +6,7 @@
   class="navbar navbar-expand-lg navbar-light bg-light fixed-top"
   data-navbar-on-scroll="data-navbar-on-scroll"
 >
-  <div class="container">
+  <div id="head_nav" class="container">
     <a class="navbar-brand d-inline-flex" href="{% url 'main' %}">
       <img
         id="logo"
@@ -22,11 +22,6 @@
     <button
       class="navbar-toggler"
       type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -80,3 +75,9 @@
       </div>
   </div> 
 </nav>
+<script type="text/javascript">
+  $(".navbar-toggler").click(function(e){
+    e.preventDefault();
+    $("#navbarSupportedContent").not(':animated').slideToggle();
+  });
+</script>
