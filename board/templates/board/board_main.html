@@ -25,7 +25,7 @@
                         <tbody>
                             {% for board in boards %}
                             <tr>
-                                <td><a id = 'board_title_a' href="{% url 'board:request_detail' board.id %}">{{board.title}}</a></td>
+                                <td><a id = 'board_title_a' href="{% url 'board:request_detail' board.id %}">{{board.title|truncatechars:7}}</a></td>
                                 <td>{{board.cafeteria}}</td>
                                 <td>{{board.writer}}</td>
                             </tr>
