@@ -62,8 +62,9 @@
                             <th width=14%>좋아요</th>
                         </tr>
                     </thead>
+                    {% if pages %}
                     <tbody>
-                    {% for review in reviews %}
+                    {% for review in pages %}
                         <tr onclick="location.href='{% url 'restaurant:restaurant_detail' review.restaurant.id %}'">
                             <td>{{review.restaurant.name}}</td>
                             <td>{{review.menu|truncatechars:4}}</td>
@@ -86,7 +87,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for review in reviews %}
+                    {% for review in pages %}
                         <tr onclick="location.href='{% url 'restaurant:restaurant_detail' review.restaurant.id %}'">
                             <td>{{ forloop.revcounter }}</td>
                             <td>{{review.restaurant.name}}</td>
@@ -97,6 +98,8 @@
                         </tr>
                     {% endfor %}
                     </tbody>
+                    {% else %}
+                    {% endif %}
                   </table>
             </div>
         </div>
@@ -116,6 +119,5 @@
     <a class="page_click nonactive">다음 ▶</a>
     {% endif %}
 </div>
-
 
 {% endblock %}
