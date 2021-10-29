@@ -944,7 +944,7 @@
                             <span class="text-warning me-2">
                               <i class="fas fa-map-marker-alt"></i>
                             </span>
-                            <span class="text-primary">{{review.restaurant.name}}</span>
+                            <span class="text-primary">{{review.restaurant.name|truncatechars:4}}</span>
                           </div>
                           <span class="text-1000 fw-bold">{{review.menu.price}}</span><br>
                           <span class="text-1000 fw-bold">종아요:{{review.like_users.count}}개</span>
