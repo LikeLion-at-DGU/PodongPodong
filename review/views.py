@@ -53,8 +53,8 @@ def SearchReview(request):
             reviews = reviews.filter(Q(content__icontains=search_key))
         else:
             reviews = reviews.filter(Q(content__icontains=search_key)|Q(restaurant__name__icontains=search_key)|Q(menu__name__icontains=search_key)|Q(content__icontains=search_key))
-    paginator = Paginator(reviews, 10)
-    page = request.GET.get("page") or 1
+    paginator = Paginator(reviews, '10')
+    page = request.GET.get("page")
     pages = paginator.get_page(page)
     context = {
         'reviews': reviews,

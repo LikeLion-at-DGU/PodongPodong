@@ -57,7 +57,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for review in reviews %}
+            {% for review in pages %}
                 <tr onclick="location.href='{% url 'restaurant:restaurant_detail' review.restaurant.id %}'">
                     <td>{{review.restaurant.name}}</td>
                     <td>{{review.menu|truncatechars:4}}</td>
@@ -80,7 +80,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for review in reviews %}
+            {% for review in pages %}
                 <tr onclick="location.href='{% url 'restaurant:restaurant_detail' review.restaurant.id %}'">
                     <td>{{ forloop.revcounter }}</td>
                     <td>{{review.restaurant.name}}</td>

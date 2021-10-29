@@ -34,7 +34,7 @@
 
         <!-- 식당 리스트 -->
         <table width="90%" align="center">
-        {% for restaurant in restaurant_list %}
+        {% for restaurant in pages %}
             <tr style="border-bottom: 1px solid #dee2e6;">
                 <td style="width: 30%; padding: 10px;">
                     <a href="{{ restaurant.get_absolute_url }}" >
