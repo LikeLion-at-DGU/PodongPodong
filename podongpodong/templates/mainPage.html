@@ -484,8 +484,8 @@
               </div>
             </div>
           </div>
-        </div> 
-      </div>    
+        </div>
+      </div>
       <!--모바일 이외의 화면-->
       <div class="row flex-center d-none d-sm-block">
         <div>
@@ -500,7 +500,7 @@
                 <div class="row h-100 align-items-center">
                   <div class="col-sm-3 col-md-3 col-xl-3 col-lg-3 col-xxl-3 mb-5 h-100">
                     <div class="card card-span h-100 rounded-circle" style="text-align: center;">
-                      <a href="{% url 'restaurant:restaurant_list' %}"> 
+                      <a href="{% url 'restaurant:restaurant_list' %}">
                         <img
                         class="img-fluid rounded-circle h-100"
                         src="{% static 'img/gallery/all.png' %}"
@@ -920,6 +920,7 @@
                     {% for review in review %}
                     <div class="col-4 col-md-4 mb-5 h-100">
                       <div class="card card-span h-100 rounded-3">
+                          <div style="width : 104px; height : 104px; overflow: hidden;display: flex; align-items: center; justify-content: center;">
                         {% if review.thumbnail %}
                       <img
                         class="img-fluid rounded-3 h-100"
@@ -927,15 +928,18 @@
                         alt="..."
                         width="104px"
                         height="104px"
+                        style="object-fit: cover;"
                       >
                       {% else %}
                       <img
-                      class="img-fluid rounded-3 h-100" 
+                      class="img-fluid rounded-3 h-100"
                       src="{% static 'img/gallery/logo_black.png' %}"
-                      width="104px"
-                      height="104px">
+                      width="104"
+                      height="104"
+                      style="object-fit: cover;"
+                      >
                       {%endif%}
-  
+                        </div>
                         <div class="card-body ps-0">
                           <h5 class="fw-bold text-1000 text-truncate mb-1">
                             {{review.menu.name}}
@@ -996,7 +1000,7 @@
                       >
                       {% else %}
                       <img
-                      class="img-fluid rounded-3 h-100" 
+                      class="img-fluid rounded-3 h-100"
                       src="{% static 'img/gallery/logo_black.png' %}"
                       width="228px"
                       height="228px">
